@@ -1,0 +1,880 @@
+/* ============================================
+   NETHRA FOOTER — CSS VARIABLES
+   ============================================ */
+:root {
+  --nethra-bg-primary: #0a0a0f;
+  --nethra-bg-secondary: #0d0d14;
+  --nethra-bg-tertiary: #12121c;
+  --nethra-bg-glass: rgba(13, 13, 20, 0.75);
+  --nethra-bg-glass-hover: rgba(20, 20, 32, 0.85);
+
+  --nethra-text-primary: #e8e8ef;
+  --nethra-text-secondary: #9494a8;
+  --nethra-text-tertiary: #5e5e72;
+  --nethra-text-muted: #3e3e52;
+
+  --nethra-cyan: #00f5ff;
+  --nethra-cyan-dim: rgba(0, 245, 255, 0.15);
+  --nethra-cyan-glow: rgba(0, 245, 255, 0.4);
+  --nethra-purple: #a855f7;
+  --nethra-purple-dim: rgba(168, 85, 247, 0.15);
+  --nethra-purple-glow: rgba(168, 85, 247, 0.4);
+  --nethra-blue: #3b82f6;
+  --nethra-pink: #ec4899;
+
+  --nethra-gradient-primary: linear-gradient(135deg, #00f5ff, #a855f7);
+  --nethra-gradient-secondary: linear-gradient(135deg, #a855f7, #ec4899);
+  --nethra-gradient-subtle: linear-gradient(
+    135deg,
+    rgba(0, 245, 255, 0.08),
+    rgba(168, 85, 247, 0.08)
+  );
+
+  --nethra-border-subtle: rgba(255, 255, 255, 0.06);
+  --nethra-border-hover: rgba(255, 255, 255, 0.12);
+
+  --nethra-radius-sm: 8px;
+  --nethra-radius-md: 12px;
+  --nethra-radius-lg: 16px;
+  --nethra-radius-xl: 24px;
+  --nethra-radius-full: 9999px;
+
+  --nethra-shadow-glow-cyan: 0 0 20px rgba(0, 245, 255, 0.15);
+  --nethra-shadow-glow-purple: 0 0 20px rgba(168, 85, 247, 0.15);
+
+  --nethra-font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --nethra-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --nethra-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --nethra-transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --nethra-transition-smooth: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --nethra-container-max: 1280px;
+  --nethra-footer-pad-x: clamp(1.25rem, 5vw, 3rem);
+  --nethra-footer-pad-y: clamp(3rem, 6vw, 5rem);
+}
+
+/* ============================================
+   FOOTER — BASE
+   ============================================ */
+.nethra-footer {
+  position: relative;
+  overflow: hidden;
+  background: var(--nethra-bg-primary);
+  font-family: var(--nethra-font-primary);
+  color: var(--nethra-text-secondary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   GRADIENT TOP BORDER
+   ============================================ */
+.nethra-footer-glow-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--nethra-gradient-primary);
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.nethra-footer-glow-border::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 245, 255, 0.06) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   FLOATING GRADIENT BLOBS
+   ============================================ */
+.nethra-footer-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  will-change: transform;
+}
+
+.nethra-footer--visible .nethra-footer-blob {
+  opacity: 1;
+}
+
+.nethra-footer-blob--1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 245, 255, 0.07), transparent 70%);
+  bottom: -120px;
+  left: -100px;
+  animation: nethraFooterBlobFloat1 18s ease-in-out infinite;
+}
+
+.nethra-footer-blob--2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.06),
+    transparent 70%
+  );
+  top: -80px;
+  right: -60px;
+  animation: nethraFooterBlobFloat2 22s ease-in-out infinite;
+}
+
+.nethra-footer-blob--3 {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(
+    circle,
+    rgba(236, 72, 153, 0.04),
+    transparent 70%
+  );
+  bottom: 20%;
+  left: 45%;
+  animation: nethraFooterBlobFloat3 15s ease-in-out infinite;
+}
+
+@keyframes nethraFooterBlobFloat1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.95);
+  }
+}
+
+@keyframes nethraFooterBlobFloat2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-25px, 20px) scale(1.08);
+  }
+  66% {
+    transform: translate(20px, -10px) scale(0.96);
+  }
+}
+
+@keyframes nethraFooterBlobFloat3 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -25px) scale(1.1);
+  }
+}
+
+/* ============================================
+   FADE-IN ON SCROLL
+   ============================================ */
+.nethra-footer .nethra-footer-comp-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nethra-footer--visible .nethra-footer-comp-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+.nethra-footer-comp-container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--nethra-container-max);
+  margin: 0 auto;
+  padding: var(--nethra-footer-pad-y) var(--nethra-footer-pad-x);
+}
+
+/* ============================================
+   MAIN CONTENT GRID
+   ============================================ */
+.nethra-footer-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* ============================================
+   BRAND SECTION
+   ============================================ */
+.nethra-footer-comp-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 380px;
+}
+
+.nethra-footer-comp-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.nethra-footer-logo-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--nethra-radius-sm);
+  background: var(--nethra-gradient-subtle);
+  border: 1px solid var(--nethra-border-subtle);
+  transition: var(--nethra-transition-base);
+}
+
+.nethra-footer-comp-logo:hover .nethra-footer-logo-icon {
+  border-color: var(--nethra-border-hover);
+  box-shadow: var(--nethra-shadow-glow-cyan);
+}
+
+.nethra-footer-logo-text {
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--nethra-gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 12px rgba(0, 245, 255, 0.3));
+  transition: filter var(--nethra-transition-base);
+}
+
+.nethra-footer-comp-logo:hover .nethra-footer-logo-text {
+  filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.5));
+}
+
+.nethra-footer-comp-description {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--nethra-text-tertiary);
+  margin: 0;
+}
+
+/* ============================================
+   TYPING INDICATOR (AI FEEL)
+   ============================================ */
+.nethra-footer-typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.875rem;
+  background: var(--nethra-bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--nethra-border-subtle);
+  border-radius: var(--nethra-radius-full);
+  width: fit-content;
+}
+
+.nethra-footer-typing-avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--nethra-cyan-dim);
+}
+
+.nethra-footer-typing-bubble {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nethra-footer-typing-text {
+  font-size: 0.75rem;
+  color: var(--nethra-text-tertiary);
+  font-family: var(--nethra-font-mono);
+  letter-spacing: 0.02em;
+}
+
+.nethra-footer-typing-dots {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.nethra-footer-typing-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--nethra-cyan);
+  opacity: 0.5;
+  animation: nethraFooterTypingDot 1.4s ease-in-out infinite;
+}
+
+.nethra-footer-typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.nethra-footer-typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes nethraFooterTypingDot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+/* ============================================
+   SOCIAL ICONS
+   ============================================ */
+.nethra-footer-comp-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.nethra-footer-comp-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--nethra-radius-sm);
+  background: var(--nethra-bg-glass);
+  border: 1px solid var(--nethra-border-subtle);
+  color: var(--nethra-text-tertiary);
+  text-decoration: none;
+  transition: all var(--nethra-transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.nethra-footer-comp-social-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--nethra-gradient-primary);
+  opacity: 0;
+  transition: opacity var(--nethra-transition-base);
+  border-radius: inherit;
+}
+
+.nethra-footer-comp-social-icon:hover {
+  color: var(--nethra-text-primary);
+  border-color: var(--nethra-cyan);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.nethra-footer-comp-social-icon:hover::before {
+  opacity: 0.1;
+}
+
+.nethra-footer-comp-social-icon svg {
+  position: relative;
+  z-index: 1;
+  transition: transform var(--nethra-transition-fast);
+}
+
+.nethra-footer-comp-social-icon:hover svg {
+  transform: scale(1.1);
+}
+
+/* ============================================
+   LINK COLUMNS
+   ============================================ */
+.nethra-footer-comp-links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.nethra-footer-comp-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nethra-footer-column-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--nethra-text-primary);
+  margin: 0;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+
+.nethra-footer-column-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--nethra-gradient-primary);
+  border-radius: 1px;
+}
+
+.nethra-footer-column-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.nethra-footer-comp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--nethra-text-tertiary);
+  text-decoration: none;
+  padding: 0.375rem 0;
+  transition: all var(--nethra-transition-base);
+  position: relative;
+}
+
+.nethra-footer-link-arrow {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--nethra-text-muted);
+  transform: translateX(0);
+  transition: all var(--nethra-transition-base);
+  opacity: 0;
+  width: 0;
+}
+
+.nethra-footer-comp-link:hover {
+  color: var(--nethra-text-primary);
+  text-shadow: 0 0 12px rgba(0, 245, 255, 0.3);
+  transform: translateX(4px);
+}
+
+.nethra-footer-comp-link:hover .nethra-footer-link-arrow {
+  color: var(--nethra-cyan);
+  opacity: 1;
+  width: 10px;
+}
+
+/* ============================================
+   CTA COLUMN
+   ============================================ */
+.nethra-footer-cta-column {
+  gap: 1rem;
+}
+
+.nethra-footer-cta-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--nethra-text-tertiary);
+  margin: 0;
+}
+
+.nethra-footer-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--nethra-gradient-primary);
+  color: var(--nethra-bg-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--nethra-font-primary);
+  text-decoration: none;
+  border-radius: var(--nethra-radius-full);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--nethra-transition-base);
+  width: fit-content;
+}
+
+.nethra-footer-cta-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #a855f7, #00f5ff);
+  opacity: 0;
+  transition: opacity var(--nethra-transition-base);
+}
+
+.nethra-footer-cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(0, 245, 255, 0.35),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.nethra-footer-cta-button:hover::before {
+  opacity: 1;
+}
+
+.nethra-footer-cta-button-text,
+.nethra-footer-cta-button svg {
+  position: relative;
+  z-index: 1;
+}
+
+.nethra-footer-cta-button svg {
+  transition: transform var(--nethra-transition-base);
+}
+
+.nethra-footer-cta-button:hover svg {
+  transform: translateX(3px);
+}
+
+/* Newsletter */
+.nethra-footer-newsletter {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nethra-footer-newsletter-label {
+  font-size: 0.75rem;
+  color: var(--nethra-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.nethra-footer-newsletter-input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--nethra-bg-glass);
+  border: 1px solid var(--nethra-border-subtle);
+  border-radius: var(--nethra-radius-full);
+  overflow: hidden;
+  transition: border-color var(--nethra-transition-base),
+    box-shadow var(--nethra-transition-base);
+}
+
+.nethra-footer-newsletter-input-wrap:focus-within {
+  border-color: var(--nethra-cyan);
+  box-shadow: 0 0 0 3px var(--nethra-cyan-dim),
+    var(--nethra-shadow-glow-cyan);
+}
+
+.nethra-footer-newsletter-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.625rem 1rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.8125rem;
+  font-family: var(--nethra-font-primary);
+  color: var(--nethra-text-primary);
+}
+
+.nethra-footer-newsletter-input::placeholder {
+  color: var(--nethra-text-muted);
+}
+
+.nethra-footer-newsletter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 3px;
+  border-radius: 50%;
+  background: var(--nethra-gradient-primary);
+  border: none;
+  color: var(--nethra-bg-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--nethra-transition-base);
+}
+
+.nethra-footer-newsletter-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.35);
+}
+
+.nethra-footer-newsletter-btn:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   BOTTOM SECTION
+   ============================================ */
+.nethra-footer-comp-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--nethra-border-subtle);
+}
+
+.nethra-footer-bottom-left,
+.nethra-footer-bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nethra-footer-copyright {
+  font-size: 0.8125rem;
+  color: var(--nethra-text-muted);
+  margin: 0;
+  text-align: center;
+}
+
+.nethra-footer-legal-link {
+  font-size: 0.8125rem;
+  color: var(--nethra-text-tertiary);
+  text-decoration: none;
+  transition: color var(--nethra-transition-fast);
+  padding: 0.25rem 0;
+}
+
+.nethra-footer-legal-link:hover {
+  color: var(--nethra-cyan);
+}
+
+.nethra-footer-legal-divider {
+  color: var(--nethra-text-muted);
+  font-size: 0.625rem;
+  user-select: none;
+}
+
+/* ============================================
+   RESPONSIVE — TABLET (≥ 640px)
+   ============================================ */
+@media (min-width: 640px) {
+  .nethra-footer-comp-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nethra-footer-comp-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* ============================================
+   RESPONSIVE — DESKTOP SM (≥ 768px)
+   ============================================ */
+@media (min-width: 768px) {
+  .nethra-footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .nethra-footer-comp-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVE — DESKTOP (≥ 1024px)
+   ============================================ */
+@media (min-width: 1024px) {
+  .nethra-footer-main {
+    grid-template-columns: 340px 1fr;
+    gap: 5rem;
+  }
+
+  .nethra-footer-comp-links {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVE — LARGE (≥ 1280px)
+   ============================================ */
+@media (min-width: 1280px) {
+  .nethra-footer-main {
+    grid-template-columns: 380px 1fr;
+    gap: 6rem;
+  }
+
+  .nethra-footer-comp-links {
+    gap: 2rem;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .nethra-footer-blob {
+    animation: none !important;
+  }
+
+  .nethra-footer-typing-dot {
+    animation: none !important;
+    opacity: 0.5 !important;
+  }
+
+  .nethra-footer .nethra-footer-comp-container {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .nethra-footer-comp-social-icon,
+  .nethra-footer-cta-button,
+  .nethra-footer-comp-link,
+  .nethra-footer-newsletter-btn {
+    transition: none !important;
+  }
+}
+
+/* ============================================
+   STAGGERED FADE-IN FOR COLUMNS
+   ============================================ */
+.nethra-footer--visible .nethra-footer-comp-brand {
+  animation: nethraFooterFadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+
+.nethra-footer--visible .nethra-footer-comp-column:nth-child(1) {
+  animation: nethraFooterFadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+.nethra-footer--visible .nethra-footer-comp-column:nth-child(2) {
+  animation: nethraFooterFadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+.nethra-footer--visible .nethra-footer-comp-column:nth-child(3) {
+  animation: nethraFooterFadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+.nethra-footer--visible .nethra-footer-comp-column:nth-child(4) {
+  animation: nethraFooterFadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+}
+
+.nethra-footer--visible .nethra-footer-comp-bottom {
+  animation: nethraFooterFadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
+}
+
+@keyframes nethraFooterFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   FOCUS STYLES (Accessibility)
+   ============================================ */
+.nethra-footer-comp-link:focus-visible,
+.nethra-footer-comp-social-icon:focus-visible,
+.nethra-footer-cta-button:focus-visible,
+.nethra-footer-legal-link:focus-visible,
+.nethra-footer-comp-logo:focus-visible,
+.nethra-footer-newsletter-btn:focus-visible {
+  outline: 2px solid var(--nethra-cyan);
+  outline-offset: 3px;
+  border-radius: var(--nethra-radius-sm);
+}
+/* ============================================
+   MADE BY CREDIT
+   ============================================ */
+.nethra-footer-credit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.nethra-footer-credit-text {
+  font-size: 0.78rem;
+  color: var(--nethra-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nethra-footer-credit-heart {
+  color: var(--nethra-pink);
+  font-size: 0.9rem;
+  animation: nethraHeartbeat 1.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+
+
+.nethra-footer-credit-names {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nethra-footer-credit-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--nethra-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.01em;
+}
+
+.nethra-footer-credit-ampersand {
+  font-size: 0.75rem;
+  color: var(--nethra-text-muted);
+  font-weight: 400;
+}
+
+/* Stagger animation */
+.nethra-footer--visible .nethra-footer-credit {
+  animation: nethraFooterFadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nethra-footer-credit-heart {
+    animation: none !important;
+  }
+}

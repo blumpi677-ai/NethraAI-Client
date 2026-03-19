@@ -1,0 +1,2868 @@
+/* ============================================
+   NETHRA ABOUT PAGE — UPDATED STYLES
+   Modern, High-Performance, Fully Responsive
+   ============================================ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
+:root {
+  /* Fluid spacing */
+  --space-2xs: clamp(0.125rem, 0.3vw, 0.25rem);
+  --space-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 1vw, 0.75rem);
+  --space-md: clamp(1rem, 2vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 3vw, 2.5rem);
+  --space-xl: clamp(2rem, 4vw, 4rem);
+  --space-2xl: clamp(3rem, 6vw, 6rem);
+  --space-3xl: clamp(4rem, 8vw, 8rem);
+
+  /* Fluid typography */
+  --text-xs: clamp(0.7rem, 0.8vw, 0.75rem);
+  --text-sm: clamp(0.8rem, 0.9vw, 0.875rem);
+  --text-base: clamp(0.875rem, 1vw, 1rem);
+  --text-md: clamp(1rem, 1.2vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1.5vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 2vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 2.5vw, 2rem);
+  --text-3xl: clamp(1.875rem, 3.5vw, 2.75rem);
+  --text-4xl: clamp(2.25rem, 5vw, 3.75rem);
+  --text-5xl: clamp(2.75rem, 6vw, 4.5rem);
+
+  /* Container */
+  --container-max: 1400px;
+  --container-pad: clamp(1rem, 4vw, 2rem);
+}
+
+/* ============================================
+   SCROLL PROGRESS
+   ============================================ */
+.nethra-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 1000;
+  background: transparent;
+}
+
+.nethra-scroll-progress-bar {
+  height: 100%;
+  background: var(--gradient-primary);
+  box-shadow: var(--glow-cyan);
+  transition: width 50ms linear;
+  will-change: width;
+}
+
+/* ============================================
+   ANIMATED BACKGROUND
+   ============================================ */
+.nethra-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.nethra-bg-gradient-mesh {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-mesh);
+  opacity: 0.9;
+}
+
+.nethra-bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.3;
+  will-change: transform;
+  animation: nethraBlob 30s ease-in-out infinite;
+}
+
+.nethra-bg-blob-1 {
+  width: min(60vw, 700px);
+  height: min(60vw, 700px);
+  background: var(--accent-primary-glow);
+  top: -20%;
+  left: -10%;
+}
+
+.nethra-bg-blob-2 {
+  width: min(50vw, 600px);
+  height: min(50vw, 600px);
+  background: var(--accent-secondary-glow);
+  bottom: -15%;
+  right: -10%;
+  animation-delay: -10s;
+}
+
+.nethra-bg-blob-3 {
+  width: min(40vw, 500px);
+  height: min(40vw, 500px);
+  background: var(--accent-tertiary-glow);
+  top: 40%;
+  left: 55%;
+  animation-delay: -20s;
+}
+
+@keyframes nethraBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -30px) scale(1.04); }
+  50% { transform: translate(-20px, 25px) scale(0.96); }
+  75% { transform: translate(25px, 30px) scale(1.02); }
+}
+
+.nethra-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+  background-size: clamp(40px, 6vw, 80px) clamp(40px, 6vw, 80px);
+  mask-image: radial-gradient(ellipse at center, black 10%, transparent 70%);
+}
+
+.nethra-bg-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+.nethra-bg-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nethra-bg-particle {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background: var(--accent-primary);
+  border-radius: 50%;
+  left: var(--x);
+  bottom: -10px;
+  opacity: 0;
+  animation: nethraParticle var(--duration) linear infinite;
+  animation-delay: var(--delay);
+}
+
+.nethra-bg-particle:nth-child(odd) {
+  background: var(--accent-secondary);
+}
+
+.nethra-bg-particle:nth-child(3n) {
+  background: var(--accent-tertiary);
+}
+
+@keyframes nethraParticle {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
+}
+
+/* ============================================
+   PAGE CONTAINER
+   ============================================ */
+.nethra-about {
+  min-height: 100vh;
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.nethra-about--loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-about-wrapper {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* ============================================
+   SECTION BADGE
+   ============================================ */
+.nethra-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--accent-primary-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-accent);
+  margin-bottom: var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.nethra-badge-icon {
+  display: flex;
+  align-items: center;
+}
+
+.nethra-badge-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.nethra-badge-glow {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.nethra-badge:hover .nethra-badge-glow {
+  opacity: 0.08;
+}
+
+/* ============================================
+   SECTION TITLES (SHARED)
+   ============================================ */
+.nethra-section-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.025em;
+}
+
+.nethra-gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nethra-section-desc {
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+/* ============================================
+   BUTTONS (SHARED)
+   ============================================ */
+.nethra-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.nethra-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.nethra-btn-primary {
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-primary);
+}
+
+.nethra-btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.nethra-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary), var(--glow-cyan), var(--glow-purple-sm);
+}
+
+.nethra-btn-primary:hover::before {
+  opacity: 1;
+}
+
+.nethra-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+.nethra-btn-primary:active {
+  transform: translateY(0);
+}
+
+.nethra-btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-medium);
+}
+
+.nethra-btn-ghost:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+  background: var(--accent-primary-subtle);
+}
+
+.nethra-btn--lg {
+  padding: 14px 32px;
+  font-size: var(--text-md);
+}
+
+.nethra-btn--lg svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nethra-btn-play-icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-primary-subtle);
+  border-radius: 50%;
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.nethra-btn-play-icon svg {
+  width: 10px;
+  height: 10px;
+  margin-left: 2px;
+  color: var(--accent-primary);
+}
+
+.nethra-btn-ghost:hover .nethra-btn-play-icon {
+  background: var(--accent-primary);
+}
+
+.nethra-btn-ghost:hover .nethra-btn-play-icon svg {
+  color: var(--text-inverse);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.nethra-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+  padding: var(--space-2xl) 0 var(--space-3xl);
+  min-height: min(85vh, 800px);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out 0.15s, transform 0.8s ease-out 0.15s;
+}
+
+.nethra-hero--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-hero-content {
+  max-width: 620px;
+}
+
+.nethra-hero-title {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  line-height: 1.08;
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.035em;
+}
+
+.nethra-hero-title-line {
+  display: block;
+}
+
+.nethra-hero-description {
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-lg);
+}
+
+.nethra-hero-cta {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+/* Trust indicators */
+.nethra-hero-trust {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.nethra-hero-trust-avatars {
+  display: flex;
+}
+
+.nethra-hero-trust-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  border: 2px solid var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-left: calc(var(--i) * -1px * 3 + -8px);
+  position: relative;
+  z-index: calc(10 - var(--i));
+}
+
+.nethra-hero-trust-avatar:first-child {
+  margin-left: 0;
+}
+
+.nethra-hero-trust-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nethra-hero-trust-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.nethra-hero-trust-star svg {
+  width: 12px;
+  height: 12px;
+  color: #f59e0b;
+}
+
+.nethra-hero-trust-text span {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+/* Hero Visual */
+.nethra-hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: clamp(300px, 40vw, 500px);
+}
+
+.nethra-hero-orb-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
+.nethra-orb {
+  position: relative;
+  width: clamp(160px, 22vw, 260px);
+  height: clamp(160px, 22vw, 260px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nethra-orb-core {
+  width: 45%;
+  height: 45%;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  box-shadow: var(--glow-cyan-lg), var(--glow-purple);
+  animation: nethraPulse 4s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nethra-orb-core-inner {
+  width: 40%;
+  height: 40%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: nethraPulse 4s ease-in-out infinite reverse;
+}
+
+@keyframes nethraPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: var(--glow-cyan-lg), var(--glow-purple);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow:
+      0 0 60px rgba(6, 182, 212, 0.45),
+      0 0 45px rgba(124, 58, 237, 0.35);
+  }
+}
+
+.nethra-orb-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid;
+  border-radius: 50%;
+  opacity: 0.25;
+  animation: nethraRingPulse 4s ease-out infinite;
+}
+
+.nethra-orb-ring-1 {
+  inset: 20%;
+  border-color: var(--accent-primary);
+}
+
+.nethra-orb-ring-2 {
+  inset: 8%;
+  border-color: var(--accent-secondary);
+  animation-delay: -1.3s;
+}
+
+.nethra-orb-ring-3 {
+  inset: -4%;
+  border-color: var(--accent-tertiary);
+  animation-delay: -2.6s;
+}
+
+@keyframes nethraRingPulse {
+  0% { transform: scale(0.85); opacity: 0.45; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.nethra-orb-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.nethra-orb-particle {
+  position: absolute;
+  width: clamp(3px, 0.5vw, 6px);
+  height: clamp(3px, 0.5vw, 6px);
+  background: var(--accent-primary);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  animation: nethraOrbit 10s linear infinite;
+  animation-delay: calc(var(--i) * -1s);
+}
+
+.nethra-orb-particle:nth-child(odd) {
+  background: var(--accent-secondary);
+  width: clamp(2px, 0.4vw, 5px);
+  height: clamp(2px, 0.4vw, 5px);
+}
+
+.nethra-orb-particle:nth-child(3n) {
+  background: var(--accent-tertiary);
+}
+
+@keyframes nethraOrbit {
+  0% {
+    transform: rotate(0deg) translateX(clamp(55px, 7.5vw, 95px)) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% { opacity: 0.25; }
+  100% {
+    transform: rotate(360deg) translateX(clamp(55px, 7.5vw, 95px)) rotate(-360deg);
+    opacity: 0.8;
+  }
+}
+
+/* Floating cards */
+.nethra-hero-floating-cards {
+  position: absolute;
+  inset: 0;
+}
+
+.nethra-floating-card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  animation: nethraFloat 7s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+.nethra-floating-card svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.nethra-floating-card-1 {
+  top: 25%;
+  right: 15%;
+  animation-delay: 0s;
+}
+
+.nethra-floating-card-1 svg { color: var(--accent-primary); }
+
+.nethra-floating-card-2 {
+  bottom: 25%;
+  left: 17%;
+  animation-delay: -1.8s;
+}
+
+.nethra-floating-card-2 svg { color: var(--accent-secondary); }
+
+.nethra-floating-card-3 {
+  top: 75%;
+  right: 20%;
+  animation-delay: -3.5s;
+}
+
+.nethra-floating-card-3 svg { color: var(--accent-tertiary); }
+
+.nethra-floating-card-4 {
+  top: 35%;
+  left: 15%;
+  animation-delay: -5s;
+}
+
+.nethra-floating-card-4 svg { color: var(--accent-primary); }
+
+@keyframes nethraFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+.nethra-hero-glow-ring {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(6, 182, 212, 0.06) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   STATS SECTION
+   ============================================ */
+.nethra-stats {
+  padding: var(--space-xl) 0;
+}
+
+.nethra-stats-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+.nethra-stat-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all var(--transition-base);
+}
+
+.nethra-stat-card--visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: var(--delay);
+}
+
+.nethra-stat-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg), var(--glow-cyan-sm);
+}
+
+.nethra-stat-icon-wrap {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto var(--space-sm);
+}
+
+.nethra-stat-icon {
+  width: clamp(40px, 4vw, 50px);
+  height: clamp(40px, 4vw, 50px);
+  background: var(--accent-primary-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.nethra-stat-card:hover .nethra-stat-icon {
+  background: var(--accent-primary-muted);
+  box-shadow: var(--glow-cyan-sm);
+}
+
+.nethra-stat-icon svg {
+  width: clamp(18px, 2vw, 22px);
+  height: clamp(18px, 2vw, 22px);
+  color: var(--accent-primary);
+}
+
+.nethra-stat-icon-glow {
+  position: absolute;
+  inset: -6px;
+  background: var(--accent-primary-glow);
+  border-radius: var(--radius-md);
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.nethra-stat-card:hover .nethra-stat-icon-glow {
+  opacity: 0.6;
+}
+
+.nethra-stat-value {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.nethra-stat-label {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-sm);
+}
+
+.nethra-stat-bar {
+  width: 100%;
+  height: 3px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.nethra-stat-bar-fill {
+  height: 100%;
+  width: 0;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+.nethra-stat-card--visible .nethra-stat-bar-fill {
+  width: var(--fill);
+}
+
+/* ============================================
+   MISSION SECTION
+   ============================================ */
+.nethra-mission {
+  padding: var(--space-2xl) 0;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.nethra-mission--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-mission-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.nethra-mission-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.nethra-mission-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-4px);
+}
+
+.nethra-mission-card--main {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.nethra-mission-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.nethra-mission-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nethra-mission-icon {
+  width: clamp(44px, 4.5vw, 56px);
+  height: clamp(44px, 4.5vw, 56px);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nethra-mission-icon svg {
+  width: clamp(22px, 2.5vw, 28px);
+  height: clamp(22px, 2.5vw, 28px);
+}
+
+.nethra-mission-icon--cyan {
+  background: var(--accent-primary-subtle);
+}
+
+.nethra-mission-icon--cyan svg { color: var(--accent-primary); }
+
+.nethra-mission-icon--purple {
+  background: var(--accent-secondary-subtle);
+  margin-bottom: var(--space-md);
+}
+
+.nethra-mission-icon--purple svg { color: var(--accent-secondary); }
+
+.nethra-mission-icon--pink {
+  background: var(--accent-tertiary-subtle);
+  margin-bottom: var(--space-md);
+}
+
+.nethra-mission-icon--pink svg { color: var(--accent-tertiary); }
+
+.nethra-mission-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+}
+
+.nethra-mission-subtitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+.nethra-mission-text {
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+}
+
+.nethra-mission-text-sm {
+  font-size: var(--text-base);
+  color: var(--text-tertiary);
+  line-height: 1.7;
+}
+
+.nethra-mission-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: auto;
+}
+
+.nethra-mission-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--accent-primary-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-accent);
+}
+
+.nethra-mission-highlight svg {
+  width: 12px;
+  height: 12px;
+}
+
+.nethra-mission-card-glow {
+  position: absolute;
+  bottom: -80px;
+  right: -80px;
+  width: 250px;
+  height: 250px;
+  background: var(--accent-primary-glow);
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* Dot grid decoration */
+.nethra-mission-visual-accent {
+  margin-top: auto;
+  padding-top: var(--space-md);
+}
+
+.nethra-mission-dot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: fit-content;
+}
+
+.nethra-mission-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-secondary);
+  opacity: 0.3;
+  transition: opacity var(--transition-base);
+}
+
+.nethra-mission-card:hover .nethra-mission-dot {
+  opacity: 0.6;
+}
+
+.nethra-mission-dot:nth-child(odd) {
+  opacity: 0.15;
+}
+
+.nethra-mission-card:hover .nethra-mission-dot:nth-child(odd) {
+  opacity: 0.4;
+}
+
+/* Progress ring */
+.nethra-mission-progress-rings {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin-top: auto;
+}
+
+.nethra-mission-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.nethra-mission-ring-bg {
+  fill: none;
+  stroke: var(--border-subtle);
+  stroke-width: 3;
+}
+
+.nethra-mission-ring-fill {
+  fill: none;
+  stroke: var(--accent-tertiary);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+.nethra-mission-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent-tertiary);
+}
+
+/* ============================================
+   STORY TIMELINE
+   ============================================ */
+.nethra-story {
+  padding: var(--space-3xl) 0;
+}
+
+.nethra-story-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.nethra-story-header--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-story-header .nethra-section-desc {
+  margin: 0 auto;
+}
+
+.nethra-timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.nethra-timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--accent-primary) 0%,
+    var(--accent-secondary) 50%,
+    var(--accent-tertiary) 100%
+  );
+  transform: translateX(-50%);
+  opacity: 0.2;
+}
+
+.nethra-timeline-item {
+  display: flex;
+  margin-bottom: var(--space-xl);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-delay: var(--delay);
+}
+
+.nethra-timeline-item--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-timeline-item--left {
+  justify-content: flex-start;
+  padding-right: calc(50% + var(--space-lg));
+}
+
+.nethra-timeline-item--right {
+  justify-content: flex-end;
+  padding-left: calc(50% + var(--space-lg));
+}
+
+.nethra-timeline-connector {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.nethra-timeline-dot {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nethra-timeline-dot-inner {
+  width: 12px;
+  height: 12px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  border: 3px solid var(--bg-primary);
+  box-shadow: var(--glow-cyan-sm);
+  z-index: 1;
+}
+
+.nethra-timeline-dot-pulse {
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--accent-primary);
+  border-radius: 50%;
+  opacity: 0;
+  animation: nethraTimelinePulse 3s ease-out infinite;
+}
+
+@keyframes nethraTimelinePulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.nethra-timeline-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  transition: all var(--transition-base);
+}
+
+.nethra-timeline-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.nethra-timeline-year {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--accent-primary-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.nethra-timeline-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+}
+
+.nethra-timeline-description {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.nethra-timeline-achievement {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--success-bg);
+  border: 1px solid var(--success-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--success);
+}
+
+.nethra-timeline-achievement svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ============================================
+   VALUES SECTION
+   ============================================ */
+.nethra-values {
+  padding: var(--space-3xl) 0;
+}
+
+.nethra-values-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.nethra-values-header--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-values-header .nethra-section-desc {
+  margin: 0 auto;
+}
+
+.nethra-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.nethra-value-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition-base);
+}
+
+.nethra-value-card--visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: var(--delay);
+}
+
+.nethra-value-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-6px);
+}
+
+.nethra-value-icon {
+  width: clamp(44px, 4vw, 52px);
+  height: clamp(44px, 4vw, 52px);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  transition: all var(--transition-base);
+}
+
+.nethra-value-icon svg {
+  width: clamp(20px, 2.2vw, 26px);
+  height: clamp(20px, 2.2vw, 26px);
+  transition: color var(--transition-base);
+}
+
+.nethra-value-icon--cyan {
+  background: var(--accent-primary-subtle);
+}
+
+.nethra-value-icon--cyan svg { color: var(--accent-primary); }
+
+.nethra-value-icon--purple {
+  background: var(--accent-secondary-subtle);
+}
+
+.nethra-value-icon--purple svg { color: var(--accent-secondary); }
+
+.nethra-value-icon--pink {
+  background: var(--accent-tertiary-subtle);
+}
+
+.nethra-value-icon--pink svg { color: var(--accent-tertiary); }
+
+.nethra-value-card:hover .nethra-value-icon {
+  background: var(--gradient-primary);
+  box-shadow: var(--glow-cyan-sm);
+}
+
+.nethra-value-card:hover .nethra-value-icon svg {
+  color: var(--text-primary);
+}
+
+.nethra-value-title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+}
+
+.nethra-value-desc {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  line-height: 1.65;
+}
+
+.nethra-value-number {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  opacity: 0.03;
+  line-height: 1;
+  transition: opacity var(--transition-base);
+}
+
+.nethra-value-card:hover .nethra-value-number {
+  opacity: 0.08;
+}
+
+.nethra-value-glow {
+  position: absolute;
+  bottom: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 180px;
+  background: var(--accent-primary-glow);
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.nethra-value-card:hover .nethra-value-glow {
+  opacity: 0.35;
+}
+
+/* ============================================
+   TEAM SECTION
+   ============================================ */
+.nethra-team {
+  padding: var(--space-3xl) 0;
+}
+
+.nethra-team-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.nethra-team-header--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-team-header .nethra-section-desc {
+  margin: 0 auto;
+}
+
+.nethra-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.nethra-team-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition-base);
+}
+
+.nethra-team-card--visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: var(--delay);
+}
+
+.nethra-team-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+.nethra-team-avatar-wrap {
+  position: relative;
+  width: clamp(72px, 7vw, 92px);
+  height: clamp(72px, 7vw, 92px);
+  margin: 0 auto var(--space-md);
+}
+
+.nethra-team-avatar {
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.nethra-team-avatar span {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.nethra-team-avatar-ring {
+  position: absolute;
+  inset: -5px;
+  z-index: 0;
+}
+
+.nethra-team-avatar-ring svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nethra-team-avatar-ring circle {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 2;
+  stroke-dasharray: 290;
+  stroke-dashoffset: 290;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nethra-team-avatar-ring--active circle {
+  stroke-dashoffset: 0;
+}
+
+.nethra-team-info {
+  margin-bottom: var(--space-md);
+}
+
+.nethra-team-name {
+  font-size: var(--text-md);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.nethra-team-role {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--accent-primary);
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+}
+
+.nethra-team-bio {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+.nethra-team-social {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nethra-social-link {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.nethra-social-link:hover {
+  background: var(--accent-primary-subtle);
+  border-color: var(--border-accent);
+  color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.nethra-social-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================
+   TECHNOLOGY SECTION
+   ============================================ */
+.nethra-tech {
+  padding: var(--space-3xl) 0;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.nethra-tech--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-tech-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.nethra-tech-content .nethra-section-desc {
+  margin-bottom: var(--space-lg);
+}
+
+.nethra-tech-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.nethra-tech-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--glass-bg-light);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  cursor: default;
+}
+
+.nethra-tech-item:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-hover);
+  transform: translateX(6px);
+}
+
+.nethra-tech-item-icon {
+  width: clamp(40px, 3.5vw, 46px);
+  height: clamp(40px, 3.5vw, 46px);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.nethra-tech-item-icon svg {
+  width: clamp(18px, 1.8vw, 22px);
+  height: clamp(18px, 1.8vw, 22px);
+}
+
+.nethra-tech-item--cyan .nethra-tech-item-icon {
+  background: var(--accent-primary-subtle);
+}
+
+.nethra-tech-item--cyan .nethra-tech-item-icon svg {
+  color: var(--accent-primary);
+}
+
+.nethra-tech-item--purple .nethra-tech-item-icon {
+  background: var(--accent-secondary-subtle);
+}
+
+.nethra-tech-item--purple .nethra-tech-item-icon svg {
+  color: var(--accent-secondary);
+}
+
+.nethra-tech-item--pink .nethra-tech-item-icon {
+  background: var(--accent-tertiary-subtle);
+}
+
+.nethra-tech-item--pink .nethra-tech-item-icon svg {
+  color: var(--accent-tertiary);
+}
+
+.nethra-tech-item:hover .nethra-tech-item-icon {
+  box-shadow: var(--glow-cyan-sm);
+}
+
+.nethra-tech-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.nethra-tech-item-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.nethra-tech-item-desc {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+.nethra-tech-item-arrow {
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.nethra-tech-item-arrow svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-primary);
+}
+
+.nethra-tech-item:hover .nethra-tech-item-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Code Window */
+.nethra-tech-visual {
+  position: relative;
+}
+
+.nethra-code-window {
+  background: var(--bg-code);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.nethra-code-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px var(--space-md);
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nethra-code-dots {
+  display: flex;
+  gap: 6px;
+  margin-right: var(--space-sm);
+}
+
+.nethra-code-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.nethra-code-dot--red { background: #ff5f57; }
+.nethra-code-dot--yellow { background: #febc2e; }
+.nethra-code-dot--green { background: #28c840; }
+
+.nethra-code-tabs {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+}
+
+.nethra-code-tab {
+  padding: 4px 12px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-quaternary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.nethra-code-tab:hover {
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+}
+
+.nethra-code-tab--active {
+  color: var(--text-accent);
+  background: var(--accent-primary-subtle);
+}
+
+.nethra-code-filename {
+  font-size: var(--text-xs);
+  color: var(--text-quaternary);
+  margin-left: auto;
+}
+
+.nethra-code-body {
+  position: relative;
+  display: flex;
+  padding: var(--space-md);
+  min-height: 200px;
+}
+
+.nethra-code-line-numbers {
+  display: flex;
+  flex-direction: column;
+  padding-right: var(--space-md);
+  border-right: 1px solid var(--border-subtle);
+  margin-right: var(--space-md);
+  user-select: none;
+}
+
+.nethra-code-line-numbers span {
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: var(--text-xs);
+  line-height: 1.75;
+  color: var(--text-quaternary);
+  text-align: right;
+  min-width: 20px;
+}
+
+.nethra-code-content {
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: var(--text-xs);
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre;
+  flex: 1;
+}
+
+.nethra-code-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 16px;
+  background: var(--accent-primary);
+  animation: nethraCursorBlink 1s step-end infinite;
+  vertical-align: bottom;
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-md);
+}
+
+@keyframes nethraCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Tech Metrics */
+.nethra-tech-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.nethra-tech-metric {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  text-align: center;
+}
+
+.nethra-tech-metric-value {
+  display: block;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nethra-tech-metric-label {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--text-quaternary);
+  margin-top: 2px;
+}
+
+/* ============================================
+   TESTIMONIALS SECTION
+   ============================================ */
+.nethra-testimonials {
+  padding: var(--space-3xl) 0;
+}
+
+.nethra-testimonials-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.nethra-testimonials-header--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-testimonials-header .nethra-section-desc {
+  margin: 0 auto;
+}
+
+.nethra-testimonials-carousel {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.nethra-testimonials-track {
+  position: relative;
+  min-height: 280px;
+}
+
+.nethra-testimonial-card {
+  position: absolute;
+  inset: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.nethra-testimonial-card--active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.nethra-testimonial-quote-mark {
+  font-size: 4rem;
+  line-height: 0.8;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.3;
+  margin-bottom: var(--space-sm);
+}
+
+.nethra-testimonial-stars {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  margin-bottom: var(--space-md);
+}
+
+.nethra-testimonial-star svg {
+  width: 16px;
+  height: 16px;
+  color: #f59e0b;
+}
+
+.nethra-testimonial-quote {
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 var(--space-lg);
+  font-style: italic;
+}
+
+.nethra-testimonial-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.nethra-testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.nethra-testimonial-author-info {
+  text-align: left;
+}
+
+.nethra-testimonial-author-info strong {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.nethra-testimonial-author-info span {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.nethra-testimonials-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: var(--space-lg);
+}
+
+.nethra-testimonials-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-medium);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  padding: 0;
+}
+
+.nethra-testimonials-dot:hover {
+  background: var(--accent-primary);
+  opacity: 0.6;
+}
+
+.nethra-testimonials-dot--active {
+  background: var(--accent-primary);
+  width: 24px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--glow-cyan-sm);
+}
+
+/* ============================================
+   FAQ SECTION
+   ============================================ */
+.nethra-faq {
+  padding: var(--space-3xl) 0;
+}
+
+.nethra-faq-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.nethra-faq-header--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-faq-header .nethra-section-desc {
+  margin: 0 auto;
+}
+
+.nethra-faq-list {
+  max-width: 750px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.nethra-faq-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.nethra-faq-item:hover {
+  border-color: var(--border-accent);
+}
+
+.nethra-faq-item--open {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-md), var(--glow-cyan-sm);
+}
+
+.nethra-faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: none;
+  border: none;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: color var(--transition-base);
+}
+
+.nethra-faq-question:hover {
+  color: var(--text-accent);
+}
+
+.nethra-faq-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.nethra-faq-icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-tertiary);
+}
+
+.nethra-faq-item--open .nethra-faq-icon {
+  transform: rotate(180deg);
+}
+
+.nethra-faq-item--open .nethra-faq-icon svg {
+  color: var(--accent-primary);
+}
+
+.nethra-faq-answer-wrap {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nethra-faq-answer {
+  padding: 0 var(--space-lg) var(--space-md);
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+.nethra-cta {
+  padding: var(--space-2xl) 0 var(--space-3xl);
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.nethra-cta--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-cta-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-xl);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  overflow: hidden;
+}
+
+.nethra-cta-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  opacity: 0.25;
+  pointer-events: none;
+  animation: nethraCtaGlow 8s ease-in-out infinite;
+}
+
+.nethra-cta-glow-1 {
+  top: -40%;
+  right: -15%;
+  background: radial-gradient(circle, var(--accent-primary-glow), transparent 60%);
+}
+
+.nethra-cta-glow-2 {
+  bottom: -40%;
+  left: -10%;
+  background: radial-gradient(circle, var(--accent-secondary-glow), transparent 60%);
+  animation-delay: -4s;
+}
+
+@keyframes nethraCtaGlow {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.1); }
+}
+
+.nethra-cta-content {
+  position: relative;
+  z-index: 1;
+}
+
+.nethra-cta-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+}
+
+.nethra-cta-desc {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+  max-width: 450px;
+}
+
+.nethra-cta-actions {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.nethra-cta-note {
+  font-size: var(--text-xs);
+  color: var(--text-quaternary);
+}
+
+/* Chat Window */
+.nethra-cta-chat {
+  position: relative;
+  z-index: 1;
+}
+
+.nethra-chat-window {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.nethra-chat-window-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-tertiary);
+}
+
+.nethra-chat-window-avatar {
+  width: 28px;
+  height: 28px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nethra-chat-window-avatar svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-primary);
+}
+
+.nethra-chat-window-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.nethra-chat-window-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: var(--success);
+}
+
+.nethra-chat-status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: nethraStatusPulse 2s ease-in-out infinite;
+}
+
+@keyframes nethraStatusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.nethra-chat-window-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nethra-chat-messages {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-height: 220px;
+}
+
+.nethra-chat-msg {
+  display: flex;
+  gap: 8px;
+  animation: nethraMsgIn 0.4s ease-out both;
+}
+
+@keyframes nethraMsgIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nethra-chat-msg--user {
+  flex-direction: row-reverse;
+}
+
+.nethra-chat-msg-avatar {
+  width: 28px;
+  height: 28px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nethra-chat-msg-avatar svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-primary);
+}
+
+.nethra-chat-msg-bubble {
+  background: var(--chat-bot-bg);
+  border: 1px solid var(--chat-bot-border);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--radius-sm);
+  padding: 8px 14px;
+  max-width: 85%;
+}
+
+.nethra-chat-msg--user .nethra-chat-msg-bubble {
+  background: var(--chat-user-bg);
+  border-color: var(--chat-user-border);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-sm) var(--radius-lg);
+}
+
+.nethra-chat-msg-bubble p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.nethra-chat-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--space-sm) var(--space-md);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-tertiary);
+}
+
+.nethra-chat-input input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  outline: none;
+  font-family: inherit;
+  transition: border-color var(--transition-fast);
+}
+
+.nethra-chat-input input:focus {
+  border-color: var(--border-accent);
+}
+
+.nethra-chat-input input::placeholder {
+  color: var(--text-quaternary);
+}
+
+.nethra-chat-send {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.nethra-chat-send svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-primary);
+}
+
+.nethra-chat-send:hover {
+  transform: scale(1.05);
+  box-shadow: var(--glow-cyan-sm);
+}
+
+/* Typing Indicator */
+.nethra-typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 10px 16px;
+  background: var(--chat-bot-bg);
+  border: 1px solid var(--chat-bot-border);
+  border-radius: var(--radius-lg);
+}
+
+.nethra-typing-indicator span {
+  width: 7px;
+  height: 7px;
+  background: var(--typing-indicator);
+  border-radius: 50%;
+  animation: nethraTyping 1.4s ease-in-out infinite;
+}
+
+.nethra-typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.nethra-typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes nethraTyping {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   RESPONSIVE: Large Desktop (1400px+)
+   ============================================ */
+@media (min-width: 1400px) {
+  .nethra-about-wrapper {
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+  }
+}
+
+/* ============================================
+   RESPONSIVE: Desktop (1200px - 1399px)
+   ============================================ */
+@media (max-width: 1399px) {
+  .nethra-hero { gap: var(--space-xl); }
+  .nethra-cta-card { padding: var(--space-lg); }
+}
+
+/* ============================================
+   RESPONSIVE: Small Desktop (1024px - 1199px)
+   ============================================ */
+@media (max-width: 1199px) {
+  .nethra-stats-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nethra-mission-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nethra-mission-card--main {
+    grid-column: span 2;
+    grid-row: auto;
+  }
+
+  .nethra-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+/* ============================================
+   RESPONSIVE: Tablet (768px - 1023px)
+   ============================================ */
+@media (max-width: 1023px) {
+  .nethra-hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    min-height: auto;
+    padding: var(--space-xl) 0 var(--space-2xl);
+    text-align: center;
+  }
+
+  .nethra-hero-content {
+    max-width: 100%;
+    order: 1;
+  }
+
+  .nethra-hero-visual {
+    order: 2;
+    height: clamp(240px, 35vw, 340px);
+  }
+
+  .nethra-hero-cta {
+    justify-content: center;
+  }
+
+  .nethra-hero-trust {
+    justify-content: center;
+  }
+
+  .nethra-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nethra-tech-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .nethra-tech-visual {
+    order: -1;
+  }
+
+  .nethra-cta-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .nethra-cta-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nethra-cta-actions {
+    justify-content: center;
+  }
+}
+
+/* ============================================
+   RESPONSIVE: Large Mobile (640px - 767px)
+   ============================================ */
+@media (max-width: 767px) {
+  .nethra-about-wrapper {
+    padding: 0 var(--space-sm);
+  }
+
+  .nethra-stats-container {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+  }
+
+  .nethra-mission-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nethra-mission-card--main {
+    grid-column: auto;
+  }
+
+  .nethra-mission-card {
+    padding: var(--space-md);
+  }
+
+  /* Timeline responsive */
+  .nethra-timeline-line {
+    left: 16px;
+  }
+
+  .nethra-timeline-item,
+  .nethra-timeline-item--left,
+  .nethra-timeline-item--right {
+    padding-left: 48px !important;
+    padding-right: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .nethra-timeline-connector {
+    left: 16px;
+    transform: none;
+  }
+
+  .nethra-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nethra-team-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .nethra-tech-item-arrow {
+    display: none;
+  }
+
+  .nethra-testimonials-track {
+    min-height: 320px;
+  }
+
+  .nethra-testimonial-card {
+    padding: var(--space-lg);
+  }
+
+  .nethra-floating-card {
+    display: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE: Mobile (480px - 639px)
+   ============================================ */
+@media (max-width: 639px) {
+  .nethra-hero {
+    padding: var(--space-lg) 0 var(--space-xl);
+  }
+
+  .nethra-hero-visual {
+    height: clamp(190px, 50vw, 260px);
+  }
+
+  .nethra-hero-cta {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .nethra-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nethra-hero-trust {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .nethra-stats-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .nethra-stat-card {
+    padding: var(--space-md);
+  }
+
+  .nethra-code-content {
+    font-size: 0.65rem;
+  }
+
+  .nethra-code-line-numbers {
+    display: none;
+  }
+
+  .nethra-code-tabs {
+    display: none;
+  }
+
+  .nethra-cta-card {
+    padding: var(--space-md);
+  }
+
+  .nethra-cta-actions {
+    flex-direction: column;
+  }
+
+  .nethra-tech-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .nethra-testimonials-track {
+    min-height: 380px;
+  }
+
+  .nethra-faq-question {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+  }
+
+  .nethra-faq-answer {
+    padding: 0 var(--space-md) var(--space-sm);
+  }
+}
+
+/* ============================================
+   RESPONSIVE: Small Mobile (< 480px)
+   ============================================ */
+@media (max-width: 479px) {
+  .nethra-about-wrapper {
+    padding: 0 12px;
+  }
+
+  .nethra-hero-visual {
+    height: 180px;
+  }
+
+  .nethra-orb {
+    width: 140px;
+    height: 140px;
+  }
+
+  .nethra-badge {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+
+  .nethra-mission-card,
+  .nethra-value-card,
+  .nethra-team-card,
+  .nethra-stat-card {
+    padding: var(--space-sm);
+  }
+
+  .nethra-chat-messages {
+    padding: var(--space-sm);
+    min-height: 180px;
+  }
+
+  .nethra-chat-msg-bubble {
+    padding: 6px 10px;
+  }
+
+  .nethra-chat-msg-bubble p {
+    font-size: 0.78rem;
+  }
+
+  .nethra-testimonial-card {
+    padding: var(--space-md);
+  }
+
+  .nethra-testimonial-quote {
+    font-size: var(--text-sm);
+  }
+
+  .nethra-testimonials-track {
+    min-height: 400px;
+  }
+}
+
+/* ============================================
+   LANDSCAPE MODE
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .nethra-hero {
+    min-height: auto;
+    padding: var(--space-md) 0;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .nethra-hero-visual {
+    height: 200px;
+  }
+
+  .nethra-hero-content {
+    text-align: left;
+  }
+
+  .nethra-hero-cta {
+    justify-content: flex-start;
+    flex-direction: row;
+  }
+
+  .nethra-hero-trust {
+    justify-content: flex-start;
+  }
+
+  .nethra-btn {
+    width: auto;
+  }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  .nethra-btn:hover,
+  .nethra-stat-card:hover,
+  .nethra-mission-card:hover,
+  .nethra-value-card:hover,
+  .nethra-team-card:hover,
+  .nethra-tech-item:hover,
+  .nethra-timeline-card:hover,
+  .nethra-faq-item:hover {
+    transform: none;
+  }
+
+  .nethra-btn:active {
+    transform: scale(0.98);
+  }
+
+  .nethra-stat-card:active,
+  .nethra-value-card:active,
+  .nethra-team-card:active {
+    transform: scale(0.99);
+    border-color: var(--border-accent);
+  }
+
+  .nethra-tech-item:hover {
+    transform: none;
+  }
+
+  .nethra-floating-card {
+    display: none;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.15s !important;
+    scroll-behavior: auto !important;
+  }
+
+  .nethra-bg-blob,
+  .nethra-orb-ring,
+  .nethra-orb-particle,
+  .nethra-floating-card,
+  .nethra-bg-particle,
+  .nethra-timeline-dot-pulse,
+  .nethra-chat-status-dot {
+    animation: none !important;
+  }
+
+  .nethra-orb-core {
+    animation: none !important;
+  }
+
+  .nethra-scroll-progress-bar {
+    transition: width 0.1s linear;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST MODE
+   ============================================ */
+@media (prefers-contrast: high) {
+  .nethra-mission-card,
+  .nethra-stat-card,
+  .nethra-value-card,
+  .nethra-team-card,
+  .nethra-cta-card,
+  .nethra-code-window,
+  .nethra-chat-window,
+  .nethra-faq-item,
+  .nethra-testimonial-card {
+    border-width: 2px;
+  }
+
+  .nethra-btn {
+    border: 2px solid currentColor;
+  }
+
+  .nethra-gradient-text {
+    -webkit-text-fill-color: currentColor;
+    background: none;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .nethra-bg,
+  .nethra-bg-particles,
+  .nethra-hero-visual,
+  .nethra-code-window,
+  .nethra-chat-window,
+  .nethra-scroll-progress,
+  .nethra-cta-glow,
+  .nethra-cta-chat,
+  .nethra-floating-card,
+  .nethra-value-glow,
+  .nethra-mission-card-glow {
+    display: none !important;
+  }
+
+  .nethra-about {
+    background: white !important;
+    color: black !important;
+  }
+
+  .nethra-gradient-text {
+    -webkit-text-fill-color: black;
+    background: none;
+  }
+
+  .nethra-btn {
+    display: none;
+  }
+}
+
+/* ============================================
+   FOCUS VISIBLE (ACCESSIBILITY)
+   ============================================ */
+.nethra-btn:focus-visible,
+.nethra-social-link:focus-visible,
+.nethra-code-tab:focus-visible,
+.nethra-faq-question:focus-visible,
+.nethra-testimonials-dot:focus-visible,
+.nethra-chat-send:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+.nethra-chat-input input:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 1px;
+}
+
+.nethra-stat-card:focus-within,
+.nethra-value-card:focus-within,
+.nethra-team-card:focus-within {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px var(--accent-primary-subtle);
+}
+
+/* ============================================
+   SAFE AREA INSETS (Notched Phones)
+   ============================================ */
+@supports (padding: max(0px)) {
+  .nethra-about-wrapper {
+    padding-left: max(var(--container-pad), env(safe-area-inset-left));
+    padding-right: max(var(--container-pad), env(safe-area-inset-right));
+  }
+
+  .nethra-cta {
+    padding-bottom: max(var(--space-3xl), env(safe-area-inset-bottom));
+  }
+}

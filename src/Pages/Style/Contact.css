@@ -1,0 +1,2098 @@
+/* ============================================
+   NETHRA CONTACT PAGE — COMPLETE STYLES
+   ============================================ */
+
+/* ============================================
+   ANIMATED BACKGROUND
+   ============================================ */
+.nethra-contact-page-comp-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.nethra-contact-page-comp-bg__gradient-mesh {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-mesh);
+  opacity: 0.8;
+}
+
+.nethra-contact-page-comp-bg__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  animation: ncpBlobFloat 25s ease-in-out infinite;
+}
+
+.nethra-contact-page-comp-bg__blob--1 {
+  width: 600px;
+  height: 600px;
+  background: var(--accent-primary-glow);
+  top: -200px;
+  left: -100px;
+}
+
+.nethra-contact-page-comp-bg__blob--2 {
+  width: 500px;
+  height: 500px;
+  background: var(--accent-secondary-glow);
+  bottom: -150px;
+  right: -100px;
+  animation-delay: -8s;
+}
+
+.nethra-contact-page-comp-bg__blob--3 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-tertiary-glow);
+  top: 40%;
+  left: 60%;
+  animation-delay: -16s;
+}
+
+.nethra-contact-page-comp-bg__blob--4 {
+  width: 350px;
+  height: 350px;
+  background: var(--accent-primary-glow);
+  bottom: 20%;
+  left: 10%;
+  animation-delay: -12s;
+  opacity: 0.2;
+}
+
+@keyframes ncpBlobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -30px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(20px, 30px) scale(1.02); }
+}
+
+.nethra-contact-page-comp-bg__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+}
+
+.nethra-contact-page-comp-bg__noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.nethra-contact-page-comp-bg__scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.005) 2px,
+    rgba(255, 255, 255, 0.005) 4px
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   PAGE CONTAINER
+   ============================================ */
+.nethra-contact-page {
+  min-height: 100vh;
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.nethra-contact-page--loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-contact-page__main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 40px);
+}
+
+/* ============================================
+   REUSABLE COMPONENTS
+   ============================================ */
+
+/* Glass Card */
+.nethra-contact-page-comp-glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.nethra-contact-page-comp-glass-card--hover:hover {
+  border-color: var(--border-medium);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.nethra-contact-page-comp-glass-card--glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.nethra-contact-page-comp-glass-card--glow:hover::before {
+  opacity: 1;
+}
+
+/* Section Tag */
+.nethra-contact-page-comp-section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--accent-primary-subtle);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-accent);
+  margin-bottom: 20px;
+}
+
+.nethra-contact-page-comp-section-tag svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Section Titles */
+.nethra-contact-page-comp-section-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.nethra-contact-page-comp-section-subtitle {
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  color: var(--text-tertiary);
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+/* Gradient Text */
+.nethra-contact-page-comp-gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Buttons */
+.nethra-contact-page-comp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nethra-contact-page-comp-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.nethra-contact-page-comp-btn--primary {
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.nethra-contact-page-comp-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary), var(--glow-cyan);
+}
+
+.nethra-contact-page-comp-btn--glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+}
+
+.nethra-contact-page-comp-btn--glass:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+  background: var(--accent-primary-subtle);
+  transform: translateY(-2px);
+}
+
+.nethra-contact-page-comp-btn--lg {
+  padding: 16px 32px;
+  font-size: 1rem;
+}
+
+/* Stat */
+.nethra-contact-page-comp-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.nethra-contact-page-comp-stat__value {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: var(--accent-primary-light);
+}
+
+.nethra-contact-page-comp-stat__label {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.nethra-contact-page-comp-stat__divider {
+  width: 1px;
+  height: 36px;
+  background: var(--border-default);
+  flex-shrink: 0;
+}
+
+/* Spinner */
+.nethra-contact-page-comp-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top-color: var(--text-primary);
+  border-radius: 50%;
+  animation: ncpSpin 0.8s linear infinite;
+}
+
+@keyframes ncpSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Typing Indicator */
+.nethra-contact-page-comp-typing-indicator {
+  display: flex;
+  gap: 6px;
+  padding: 14px 18px;
+  background: var(--chat-bot-bg);
+  border: 1px solid var(--chat-bot-border);
+  border-radius: var(--radius-lg);
+}
+
+.nethra-contact-page-comp-typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: var(--typing-indicator);
+  border-radius: 50%;
+  animation: ncpTypingBounce 1.4s ease-in-out infinite;
+}
+
+.nethra-contact-page-comp-typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.nethra-contact-page-comp-typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes ncpTypingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.nethra-contact-section-hero {
+  padding: clamp(60px, 10vw, 120px) 0 clamp(40px, 6vw, 80px);
+}
+
+.nethra-contact-section-hero__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: center;
+}
+
+.nethra-contact-section-hero__content {
+  animation: ncpSlideInLeft 0.8s ease-out 0.2s both;
+}
+
+@keyframes ncpSlideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.nethra-contact-section-hero__title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.nethra-contact-section-hero__description {
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+.nethra-contact-section-hero__stats {
+  margin-bottom: 32px;
+}
+
+.nethra-contact-section-hero__stats-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 32px);
+  padding: 20px clamp(16px, 3vw, 32px);
+}
+
+.nethra-contact-section-hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Hero Visual */
+.nethra-contact-section-hero__visual {
+  animation: ncpSlideInRight 0.8s ease-out 0.4s both;
+}
+
+@keyframes ncpSlideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Chat Preview */
+.nethra-contact-page-comp-chat-preview {
+  padding: 0;
+}
+
+.nethra-contact-page-comp-chat-preview__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nethra-contact-page-comp-chat-preview__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.nethra-contact-page-comp-chat-preview__dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+}
+
+.nethra-contact-page-comp-chat-preview__dots span:first-child { background: #ef4444; }
+.nethra-contact-page-comp-chat-preview__dots span:nth-child(2) { background: #f59e0b; }
+.nethra-contact-page-comp-chat-preview__dots span:last-child { background: #10b981; }
+
+.nethra-contact-page-comp-chat-preview__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+.nethra-contact-page-comp-chat-preview__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+  animation: ncpDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes ncpDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.nethra-contact-page-comp-chat-preview__messages {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+/* Chat Bubbles */
+.nethra-contact-page-comp-chat-bubble {
+  max-width: 88%;
+  animation: ncpBubbleIn 0.5s ease-out both;
+}
+
+@keyframes ncpBubbleIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.nethra-contact-page-comp-chat-bubble--user {
+  align-self: flex-end;
+}
+
+.nethra-contact-page-comp-chat-bubble--user .nethra-contact-page-comp-chat-bubble__content {
+  background: var(--chat-user-bg);
+  border: 1px solid var(--chat-user-border);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-sm) var(--radius-lg);
+  padding: 14px 18px;
+}
+
+.nethra-contact-page-comp-chat-bubble--bot {
+  align-self: flex-start;
+  display: flex;
+  gap: 10px;
+}
+
+.nethra-contact-page-comp-chat-bubble__avatar {
+  width: 32px;
+  height: 32px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--glow-cyan-sm);
+}
+
+.nethra-contact-page-comp-chat-bubble__avatar svg {
+  width: 16px;
+  height: 16px;
+  color: white;
+}
+
+.nethra-contact-page-comp-chat-bubble--bot .nethra-contact-page-comp-chat-bubble__content {
+  background: var(--chat-bot-bg);
+  border: 1px solid var(--chat-bot-border);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--radius-sm);
+  padding: 14px 18px;
+}
+
+.nethra-contact-page-comp-chat-bubble__content p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.nethra-contact-page-comp-chat-bubble--user .nethra-contact-page-comp-chat-bubble__content p {
+  color: var(--text-primary);
+}
+
+.nethra-contact-page-comp-chat-bubble--typing {
+  animation-delay: 1.8s !important;
+}
+
+/* Chat Input */
+.nethra-contact-page-comp-chat-preview__input {
+  display: flex;
+  gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.nethra-contact-page-comp-chat-preview__input input {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.nethra-contact-page-comp-chat-preview__send {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nethra-contact-page-comp-chat-preview__send svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Scroll Indicator */
+.nethra-contact-section-hero__scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: clamp(40px, 6vw, 80px);
+  animation: ncpFadeIn 1s ease-out 1.5s both;
+}
+
+@keyframes ncpFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.nethra-contact-section-hero__scroll span {
+  font-size: 0.75rem;
+  color: var(--text-quaternary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.nethra-contact-section-hero__scroll-mouse {
+  width: 24px;
+  height: 38px;
+  border: 2px solid var(--border-medium);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.nethra-contact-section-hero__scroll-wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--accent-primary);
+  border-radius: 4px;
+  margin-top: 6px;
+  animation: ncpScrollWheel 2s ease-in-out infinite;
+}
+
+@keyframes ncpScrollWheel {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+}
+
+/* ============================================
+   CHANNELS SECTION
+   ============================================ */
+.nethra-contact-section-channels {
+  padding: clamp(60px, 8vw, 100px) 0;
+}
+
+.nethra-contact-section-channels__container {
+  width: 100%;
+}
+
+.nethra-contact-section-channels__header {
+  text-align: center;
+  margin-bottom: clamp(40px, 5vw, 60px);
+}
+
+.nethra-contact-section-channels__header .nethra-contact-page-comp-section-subtitle {
+  margin: 0 auto;
+}
+
+.nethra-contact-section-channels__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Channel Card */
+.nethra-contact-page-comp-channel-card {
+  padding: clamp(24px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+
+.nethra-contact-page-comp-channel-card__badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nethra-contact-page-comp-channel-card__badge--cyan {
+  background: var(--accent-primary-subtle);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: var(--accent-primary-light);
+}
+
+.nethra-contact-page-comp-channel-card__badge--purple {
+  background: var(--accent-secondary-subtle);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  color: var(--accent-secondary-light);
+}
+
+.nethra-contact-page-comp-channel-card__badge--pink {
+  background: var(--accent-tertiary-subtle);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  color: var(--accent-tertiary-light);
+}
+
+.nethra-contact-page-comp-channel-card__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.nethra-contact-page-comp-channel-card__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.nethra-contact-page-comp-channel-card__icon--cyan {
+  background: var(--accent-primary-subtle);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  color: var(--accent-primary-light);
+}
+
+.nethra-contact-page-comp-channel-card__icon--purple {
+  background: var(--accent-secondary-subtle);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  color: var(--accent-secondary-light);
+}
+
+.nethra-contact-page-comp-channel-card__icon--pink {
+  background: var(--accent-tertiary-subtle);
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  color: var(--accent-tertiary-light);
+}
+
+.nethra-contact-page-comp-channel-card:hover .nethra-contact-page-comp-channel-card__icon--cyan {
+  box-shadow: var(--glow-cyan-sm);
+}
+
+.nethra-contact-page-comp-channel-card:hover .nethra-contact-page-comp-channel-card__icon--purple {
+  box-shadow: var(--glow-purple-sm);
+}
+
+.nethra-contact-page-comp-channel-card:hover .nethra-contact-page-comp-channel-card__icon--pink {
+  box-shadow: var(--glow-pink-sm);
+}
+
+.nethra-contact-page-comp-channel-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.nethra-contact-page-comp-channel-card__desc {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+.nethra-contact-page-comp-channel-card__contact {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.nethra-contact-page-comp-channel-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: auto;
+  padding-top: 8px;
+  transition: gap var(--transition-fast);
+}
+
+.nethra-contact-page-comp-channel-card__link svg {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition-fast);
+}
+
+.nethra-contact-page-comp-channel-card__link:hover {
+  gap: 10px;
+}
+
+.nethra-contact-page-comp-channel-card__link:hover svg {
+  transform: translateX(2px);
+}
+
+.nethra-contact-page-comp-channel-card__link--cyan { color: var(--accent-primary-light); }
+.nethra-contact-page-comp-channel-card__link--purple { color: var(--accent-secondary-light); }
+.nethra-contact-page-comp-channel-card__link--pink { color: var(--accent-tertiary-light); }
+
+/* ============================================
+   FORM SECTION
+   ============================================ */
+.nethra-contact-section-form {
+  padding: clamp(60px, 8vw, 100px) 0;
+}
+
+.nethra-contact-section-form__container {
+  width: 100%;
+}
+
+.nethra-contact-section-form__layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(24px, 3vw, 40px);
+  align-items: start;
+}
+
+/* Form Card */
+.nethra-contact-page-comp-form-card {
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.nethra-contact-page-comp-form-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  z-index: 1;
+}
+
+.nethra-contact-page-comp-form-card__header {
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+.nethra-contact-page-comp-form-card__title {
+  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.nethra-contact-page-comp-form-card__subtitle {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+/* Form */
+.nethra-contact-page-comp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nethra-contact-page-comp-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.nethra-contact-page-comp-form__group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nethra-contact-page-comp-form__group--full {
+  grid-column: 1 / -1;
+}
+
+.nethra-contact-page-comp-form__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.nethra-contact-page-comp-form__label svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.nethra-contact-page-comp-form__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nethra-contact-page-comp-form__group--focused .nethra-contact-page-comp-form__label,
+.nethra-contact-page-comp-form__group--has-value .nethra-contact-page-comp-form__label {
+  color: var(--text-accent);
+}
+
+.nethra-contact-page-comp-form__group--focused .nethra-contact-page-comp-form__label svg,
+.nethra-contact-page-comp-form__group--has-value .nethra-contact-page-comp-form__label svg {
+  color: var(--accent-primary);
+}
+
+.nethra-contact-page-comp-form__input,
+.nethra-contact-page-comp-form__select,
+.nethra-contact-page-comp-form__textarea {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.nethra-contact-page-comp-form__input::placeholder,
+.nethra-contact-page-comp-form__textarea::placeholder {
+  color: var(--text-quaternary);
+}
+
+.nethra-contact-page-comp-form__input:hover,
+.nethra-contact-page-comp-form__select:hover,
+.nethra-contact-page-comp-form__textarea:hover {
+  border-color: var(--border-medium);
+}
+
+.nethra-contact-page-comp-form__input:focus,
+.nethra-contact-page-comp-form__select:focus,
+.nethra-contact-page-comp-form__textarea:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+}
+
+.nethra-contact-page-comp-form__select-wrapper {
+  position: relative;
+}
+
+.nethra-contact-page-comp-form__select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 44px;
+}
+
+.nethra-contact-page-comp-form__select-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--text-tertiary);
+  pointer-events: none;
+  transition: all var(--transition-fast);
+}
+
+.nethra-contact-page-comp-form__group--focused .nethra-contact-page-comp-form__select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--accent-primary);
+}
+
+.nethra-contact-page-comp-form__textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* Glow Line */
+.nethra-contact-page-comp-form__glow-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: width var(--transition-base);
+  border-radius: var(--radius-full);
+}
+
+.nethra-contact-page-comp-form__group--focused .nethra-contact-page-comp-form__glow-line {
+  width: 100%;
+}
+
+/* Char Count */
+.nethra-contact-page-comp-form__char-count {
+  font-size: 0.75rem;
+  color: var(--text-quaternary);
+  font-variant-numeric: tabular-nums;
+}
+
+.nethra-contact-page-comp-form__char-count--warn {
+  color: var(--warning);
+}
+
+/* Priority Selector */
+.nethra-contact-page-comp-form__priority-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nethra-contact-page-comp-form__priority {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.nethra-contact-page-comp-form__priority input {
+  display: none;
+}
+
+.nethra-contact-page-comp-form__priority:hover {
+  border-color: var(--border-medium);
+  color: var(--text-secondary);
+}
+
+.nethra-contact-page-comp-form__priority--active.nethra-contact-page-comp-form__priority--green {
+  background: var(--success-bg);
+  border-color: var(--success-border);
+  color: var(--success);
+}
+
+.nethra-contact-page-comp-form__priority--active.nethra-contact-page-comp-form__priority--cyan {
+  background: var(--accent-primary-subtle);
+  border-color: rgba(6, 182, 212, 0.3);
+  color: var(--accent-primary-light);
+}
+
+.nethra-contact-page-comp-form__priority--active.nethra-contact-page-comp-form__priority--orange {
+  background: var(--warning-bg);
+  border-color: var(--warning-border);
+  color: var(--warning);
+}
+
+.nethra-contact-page-comp-form__priority--active.nethra-contact-page-comp-form__priority--red {
+  background: var(--error-bg);
+  border-color: var(--error-border);
+  color: var(--error);
+}
+
+/* Prompt Suggestions */
+.nethra-contact-page-comp-form__suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nethra-contact-page-comp-form__suggestions-label {
+  font-size: 0.8rem;
+  color: var(--text-quaternary);
+  font-weight: 500;
+}
+
+.nethra-contact-page-comp-form__suggestions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nethra-contact-page-comp-form__suggestion-chip {
+  padding: 6px 14px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nethra-contact-page-comp-form__suggestion-chip:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary-light);
+  background: var(--accent-primary-subtle);
+}
+
+/* Submit Button */
+.nethra-contact-page-comp-form__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: var(--gradient-button);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  margin-top: 8px;
+}
+
+.nethra-contact-page-comp-form__submit svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-fast);
+}
+
+.nethra-contact-page-comp-form__submit:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary), var(--glow-cyan);
+}
+
+.nethra-contact-page-comp-form__submit:hover svg {
+  transform: translateX(3px);
+}
+
+.nethra-contact-page-comp-form__submit--loading {
+  background: var(--bg-tertiary);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Success Card */
+.nethra-contact-page-comp-success-card {
+  padding: clamp(40px, 6vw, 80px);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: ncpScaleIn 0.5s ease-out;
+}
+
+@keyframes ncpScaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.nethra-contact-page-comp-success-card__icon {
+  width: 64px;
+  height: 64px;
+  background: var(--success-bg);
+  border: 2px solid var(--success-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  color: var(--success);
+}
+
+.nethra-contact-page-comp-success-card__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.nethra-contact-page-comp-success-card__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.nethra-contact-page-comp-success-card__desc {
+  font-size: 0.95rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.nethra-contact-page-comp-success-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.nethra-contact-page-comp-success-card__info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.nethra-contact-page-comp-success-card__info-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-primary);
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+.nethra-contact-section-form__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nethra-contact-page-comp-sidebar-card {
+  padding: clamp(20px, 3vw, 28px);
+}
+
+.nethra-contact-page-comp-sidebar-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.nethra-contact-page-comp-sidebar-card__desc {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Social Links */
+.nethra-contact-page-comp-social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nethra-contact-page-comp-social-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.nethra-contact-page-comp-social-link:hover {
+  border-color: var(--border-medium);
+  transform: translateX(4px);
+}
+
+.nethra-contact-page-comp-social-link--cyan:hover {
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+.nethra-contact-page-comp-social-link--purple:hover {
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.nethra-contact-page-comp-social-link--pink:hover {
+  border-color: rgba(236, 72, 153, 0.3);
+}
+
+.nethra-contact-page-comp-social-link__icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.nethra-contact-page-comp-social-link__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nethra-contact-page-comp-social-link__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nethra-contact-page-comp-social-link__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.nethra-contact-page-comp-social-link__handle {
+  font-size: 0.75rem;
+  color: var(--text-quaternary);
+}
+
+.nethra-contact-page-comp-social-link > svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-quaternary);
+  flex-shrink: 0;
+}
+
+/* Quick Links */
+.nethra-contact-page-comp-quick-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nethra-contact-page-comp-quick-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.nethra-contact-page-comp-quick-link:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-hover);
+  transform: translateX(4px);
+}
+
+.nethra-contact-page-comp-quick-link__icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-primary-subtle);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  color: var(--accent-primary);
+}
+
+.nethra-contact-page-comp-quick-link__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.nethra-contact-page-comp-quick-link__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nethra-contact-page-comp-quick-link__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.nethra-contact-page-comp-quick-link__desc {
+  font-size: 0.72rem;
+  color: var(--text-quaternary);
+}
+
+.nethra-contact-page-comp-quick-link > svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-quaternary);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.nethra-contact-page-comp-quick-link:hover > svg {
+  transform: translateX(3px);
+  color: var(--accent-primary);
+}
+
+/* Trust Badges */
+.nethra-contact-page-comp-sidebar-card--trust {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(124, 58, 237, 0.05));
+}
+
+.nethra-contact-page-comp-trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.nethra-contact-page-comp-trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.nethra-contact-page-comp-trust-badge svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-primary);
+}
+
+/* ============================================
+   LIVE CHAT CTA
+   ============================================ */
+.nethra-contact-section-live-chat {
+  padding: clamp(40px, 6vw, 80px) 0;
+}
+
+.nethra-contact-section-live-chat__container {
+  width: 100%;
+}
+
+.nethra-contact-page-comp-live-chat-card {
+  border-color: rgba(6, 182, 212, 0.2);
+}
+
+.nethra-contact-page-comp-live-chat-card:hover {
+  border-color: var(--accent-primary);
+}
+
+.nethra-contact-page-comp-live-chat-card__bg-glow {
+  position: absolute;
+  top: -50%;
+  left: -25%;
+  width: 150%;
+  height: 200%;
+  background: radial-gradient(circle at center, var(--accent-primary-glow) 0%, transparent 60%);
+  opacity: 0.2;
+  pointer-events: none;
+  animation: ncpPulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes ncpPulseGlow {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.05); }
+}
+
+.nethra-contact-page-comp-live-chat-card__content {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 32px);
+  padding: clamp(24px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+}
+
+.nethra-contact-page-comp-live-chat-card__icon-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nethra-contact-page-comp-live-chat-card__icon {
+  width: 64px;
+  height: 64px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.nethra-contact-page-comp-live-chat-card__icon svg {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.nethra-contact-page-comp-live-chat-card__pulse {
+  position: absolute;
+  inset: -8px;
+  border: 2px solid var(--accent-primary);
+  border-radius: calc(var(--radius-lg) + 4px);
+  animation: ncpPulseRing 2s ease-out infinite;
+}
+
+.nethra-contact-page-comp-live-chat-card__pulse--delay {
+  animation-delay: 1s;
+}
+
+@keyframes ncpPulseRing {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+.nethra-contact-page-comp-live-chat-card__text {
+  flex: 1;
+}
+
+.nethra-contact-page-comp-live-chat-card__text h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.nethra-contact-page-comp-live-chat-card__text p {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+/* Particles */
+.nethra-contact-page-comp-live-chat-card__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.nethra-contact-page-comp-live-chat-card__particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.nethra-contact-page-comp-live-chat-card__particles--active .nethra-contact-page-comp-live-chat-card__particle {
+  animation: ncpParticleFloat 2s ease-out forwards;
+}
+
+.nethra-contact-page-comp-live-chat-card__particle:nth-child(1) { left: 8%; top: 80%; animation-delay: 0s; }
+.nethra-contact-page-comp-live-chat-card__particle:nth-child(2) { left: 20%; top: 85%; animation-delay: 0.1s; }
+.nethra-contact-page-comp-live-chat-card__particle:nth-child(3) { left: 35%; top: 90%; animation-delay: 0.2s; }
+.nethra-contact-page-comp-live-chat-card__particle:nth-child(4) { left: 50%; top: 82%; animation-delay: 0.3s; }
+.nethra-contact-page-comp-live-chat-card__particle:nth-child(5) { left: 65%; top: 88%; animation-delay: 0.15s; }
+.nethra-contact-page-comp-live-chat-card__particle:nth-child(6) { left: 78%; top: 85%; animation-delay: 0.25s; }
+.nethra-contact-page-comp-live-chat-card__particle:nth-child(7) { left: 88%; top: 80%; animation-delay: 0.35s; }
+.nethra-contact-page-comp-live-chat-card__particle:nth-child(8) { left: 95%; top: 85%; animation-delay: 0.4s; }
+
+@keyframes ncpParticleFloat {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-80px) scale(0.3); }
+}
+
+/* ============================================
+   FAQ SECTION
+   ============================================ */
+.nethra-contact-section-faq {
+  padding: clamp(60px, 8vw, 100px) 0;
+}
+
+.nethra-contact-section-faq__container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.nethra-contact-section-faq__header {
+  text-align: center;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.nethra-contact-section-faq__header .nethra-contact-page-comp-section-subtitle {
+  margin: 0 auto;
+}
+
+.nethra-contact-section-faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* FAQ Item */
+.nethra-contact-page-comp-faq-item {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.nethra-contact-page-comp-faq-item:hover {
+  border-color: var(--border-default);
+}
+
+.nethra-contact-page-comp-faq-item--open {
+  border-color: rgba(6, 182, 212, 0.3);
+  background: var(--glass-bg-light);
+}
+
+.nethra-contact-page-comp-faq-item__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.nethra-contact-page-comp-faq-item__number {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.nethra-contact-page-comp-faq-item--open .nethra-contact-page-comp-faq-item__number {
+  opacity: 1;
+}
+
+.nethra-contact-page-comp-faq-item__question {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.nethra-contact-page-comp-faq-item__icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.nethra-contact-page-comp-faq-item--open .nethra-contact-page-comp-faq-item__icon {
+  background: var(--accent-primary-subtle);
+  transform: rotate(180deg);
+}
+
+.nethra-contact-page-comp-faq-item__icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.nethra-contact-page-comp-faq-item--open .nethra-contact-page-comp-faq-item__icon svg {
+  color: var(--accent-primary);
+}
+
+.nethra-contact-page-comp-faq-item__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-slow);
+}
+
+.nethra-contact-page-comp-faq-item--open .nethra-contact-page-comp-faq-item__content {
+  max-height: 400px;
+}
+
+.nethra-contact-page-comp-faq-item__answer {
+  padding: 0 24px 20px 56px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* FAQ Footer */
+.nethra-contact-section-faq__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.nethra-contact-section-faq__footer p {
+  font-size: 0.95rem;
+  color: var(--text-tertiary);
+}
+
+/* ============================================
+   OFFICES SECTION
+   ============================================ */
+.nethra-contact-section-offices {
+  padding: clamp(60px, 8vw, 100px) 0;
+}
+
+.nethra-contact-section-offices__container {
+  width: 100%;
+}
+
+.nethra-contact-section-offices__header {
+  text-align: center;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.nethra-contact-section-offices__header .nethra-contact-page-comp-section-subtitle {
+  margin: 0 auto;
+}
+
+.nethra-contact-section-offices__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Office Card */
+.nethra-contact-page-comp-office-card {
+  padding: clamp(24px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nethra-contact-page-comp-office-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.nethra-contact-page-comp-office-card__type {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nethra-contact-page-comp-office-card__type--cyan {
+  background: var(--accent-primary-subtle);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  color: var(--accent-primary-light);
+}
+
+.nethra-contact-page-comp-office-card__type--purple {
+  background: var(--accent-secondary-subtle);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  color: var(--accent-secondary-light);
+}
+
+.nethra-contact-page-comp-office-card__type--pink {
+  background: var(--accent-tertiary-subtle);
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  color: var(--accent-tertiary-light);
+}
+
+.nethra-contact-page-comp-office-card__map-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+}
+
+.nethra-contact-page-comp-office-card__map-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.nethra-contact-page-comp-office-card__map-icon--cyan {
+  background: var(--accent-primary-subtle);
+  color: var(--accent-primary-light);
+}
+
+.nethra-contact-page-comp-office-card__map-icon--purple {
+  background: var(--accent-secondary-subtle);
+  color: var(--accent-secondary-light);
+}
+
+.nethra-contact-page-comp-office-card__map-icon--pink {
+  background: var(--accent-tertiary-subtle);
+  color: var(--accent-tertiary-light);
+}
+
+.nethra-contact-page-comp-office-card__city {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.nethra-contact-page-comp-office-card__country {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
+
+.nethra-contact-page-comp-office-card__address {
+  font-size: 0.85rem;
+  color: var(--text-quaternary);
+  line-height: 1.5;
+}
+
+.nethra-contact-page-comp-office-card__timezone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.nethra-contact-page-comp-office-card__timezone svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-primary);
+}
+
+.nethra-contact-page-comp-office-card__directions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 8px;
+  transition: gap var(--transition-fast);
+}
+
+.nethra-contact-page-comp-office-card__directions svg {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition-fast);
+}
+
+.nethra-contact-page-comp-office-card__directions:hover {
+  gap: 10px;
+}
+
+.nethra-contact-page-comp-office-card__directions:hover svg {
+  transform: translateX(2px);
+}
+
+.nethra-contact-page-comp-office-card__directions--cyan { color: var(--accent-primary-light); }
+.nethra-contact-page-comp-office-card__directions--purple { color: var(--accent-secondary-light); }
+.nethra-contact-page-comp-office-card__directions--pink { color: var(--accent-tertiary-light); }
+
+/* ============================================
+   FINAL CTA
+   ============================================ */
+.nethra-contact-section-cta {
+  padding: clamp(60px, 8vw, 100px) 0 clamp(40px, 5vw, 60px);
+}
+
+.nethra-contact-section-cta__container {
+  position: relative;
+}
+
+.nethra-contact-section-cta__bg-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+}
+
+.nethra-contact-section-cta__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+}
+
+.nethra-contact-section-cta__orb--1 {
+  width: 300px;
+  height: 300px;
+  background: var(--accent-primary-glow);
+  top: -100px;
+  right: -50px;
+}
+
+.nethra-contact-section-cta__orb--2 {
+  width: 250px;
+  height: 250px;
+  background: var(--accent-secondary-glow);
+  bottom: -80px;
+  left: -30px;
+}
+
+.nethra-contact-section-cta__orb--3 {
+  width: 200px;
+  height: 200px;
+  background: var(--accent-tertiary-glow);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nethra-contact-section-cta__card {
+  padding: clamp(40px, 6vw, 80px);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.nethra-contact-section-cta__icon {
+  width: 56px;
+  height: 56px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  box-shadow: var(--glow-cyan);
+}
+
+.nethra-contact-section-cta__icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.nethra-contact-section-cta__title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.nethra-contact-section-cta__desc {
+  font-size: 0.95rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  max-width: 550px;
+  margin: 0 auto 32px;
+}
+
+.nethra-contact-section-cta__buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.nethra-contact-section-cta__features {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nethra-contact-section-cta__feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
+
+.nethra-contact-section-cta__feature svg {
+  width: 16px;
+  height: 16px;
+  color: var(--success);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .nethra-contact-section-hero__container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .nethra-contact-section-hero__visual {
+    order: -1;
+    max-width: 550px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .nethra-contact-section-hero__description {
+    max-width: none;
+  }
+
+  .nethra-contact-section-channels__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nethra-contact-section-form__layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .nethra-contact-section-form__sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .nethra-contact-page-comp-sidebar-card--trust {
+    grid-column: 1 / -1;
+  }
+
+  .nethra-contact-page-comp-live-chat-card__content {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nethra-contact-page-comp-live-chat-card__text {
+    flex: 100%;
+  }
+
+  .nethra-contact-page-comp-live-chat-card__text p {
+    max-width: none;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .nethra-contact-section-hero__stats-card {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .nethra-contact-page-comp-stat__divider {
+    display: none;
+  }
+
+  .nethra-contact-section-channels__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nethra-contact-page-comp-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .nethra-contact-section-form__sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .nethra-contact-section-offices__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nethra-contact-page-comp-faq-item__trigger {
+    padding: 16px 20px;
+  }
+
+  .nethra-contact-page-comp-faq-item__answer {
+    padding: 0 20px 16px 44px;
+    font-size: 0.85rem;
+  }
+
+  .nethra-contact-section-cta__buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nethra-contact-page-comp-btn--lg {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .nethra-contact-section-cta__features {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .nethra-contact-section-hero__title {
+    font-size: 2rem;
+  }
+
+  .nethra-contact-section-hero__actions {
+    flex-direction: column;
+  }
+
+  .nethra-contact-page-comp-chat-preview__messages {
+    padding: 16px;
+    max-height: 300px;
+  }
+
+  .nethra-contact-page-comp-chat-bubble {
+    max-width: 95%;
+  }
+
+  .nethra-contact-page-comp-form-card {
+    padding: 20px;
+  }
+
+  .nethra-contact-page-comp-form__input,
+  .nethra-contact-page-comp-form__select,
+  .nethra-contact-page-comp-form__textarea {
+    padding: 12px 14px;
+    font-size: 16px;
+  }
+
+  .nethra-contact-page-comp-form__priority-group {
+    flex-direction: column;
+  }
+
+  .nethra-contact-page-comp-form__suggestion-chip {
+    font-size: 0.7rem;
+  }
+
+  .nethra-contact-section-cta__card {
+    padding: 28px 20px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Visible */
+.nethra-contact-page-comp-form__input:focus-visible,
+.nethra-contact-page-comp-form__select:focus-visible,
+.nethra-contact-page-comp-form__textarea:focus-visible,
+.nethra-contact-page-comp-form__submit:focus-visible,
+.nethra-contact-page-comp-btn:focus-visible,
+.nethra-contact-page-comp-faq-item__trigger:focus-visible,
+.nethra-contact-page-comp-social-link:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}

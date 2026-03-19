@@ -1,0 +1,13 @@
+/* Kill WebKit's annoying default behaviors globally */
+* {
+  -webkit-tap-highlight-color: transparent; /* No more ugly gray boxes on tap */
+  -webkit-font-smoothing: antialiased;    /* Makes fonts look crisp on Mac/iOS */
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+input, button, select, textarea {
+  -webkit-appearance: none; /* Stops iOS from "bubbling" your buttons */
+  appearance: none;
+  border-radius: 0; 
+}

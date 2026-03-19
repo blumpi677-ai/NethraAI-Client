@@ -1,0 +1,1612 @@
+/* ============================================
+   NETHRA AUTH — FULL AUTHENTICATION STYLES
+   Dark Futuristic AI Theme
+   ============================================ */
+
+/* ============================================
+   BASE
+   ============================================ */
+.nethra-auth {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+.nethra-auth--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nethra-auth-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ============================================
+   TOAST NOTIFICATION
+   ============================================ */
+.nethra-auth-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: nethraToastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  max-width: 400px;
+  box-shadow: var(--shadow-xl);
+}
+
+.nethra-auth-toast--success {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid var(--success-border);
+}
+
+.nethra-auth-toast--error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid var(--error-border);
+}
+
+.nethra-auth-toast-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.nethra-auth-toast-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nethra-auth-toast--success .nethra-auth-toast-icon svg {
+  color: var(--success);
+}
+
+.nethra-auth-toast--error .nethra-auth-toast-icon svg {
+  color: var(--error);
+}
+
+.nethra-auth-toast-msg {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.nethra-auth-toast-close {
+  background: none;
+  border: none;
+  color: var(--text-quaternary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.nethra-auth-toast-close:hover {
+  color: var(--text-primary);
+}
+
+@keyframes nethraToastIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* ============================================
+   LEFT VISUAL PANEL
+   ============================================ */
+.nethra-auth-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 3rem;
+}
+
+.nethra-auth-visual-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.nethra-auth-visual-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  animation: nethraAuthBlob 25s ease-in-out infinite;
+}
+
+.nethra-auth-visual-blob--1 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-primary-glow);
+  top: -10%;
+  left: -10%;
+}
+
+.nethra-auth-visual-blob--2 {
+  width: 350px;
+  height: 350px;
+  background: var(--accent-secondary-glow);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -8s;
+}
+
+.nethra-auth-visual-blob--3 {
+  width: 250px;
+  height: 250px;
+  background: var(--accent-tertiary-glow);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -16s;
+}
+
+@keyframes nethraAuthBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(25px, -25px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+.nethra-auth-visual-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+}
+
+.nethra-auth-visual-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* Visual Content */
+.nethra-auth-visual-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 420px;
+}
+
+/* Logo Orb */
+.nethra-auth-visual-logo {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.nethra-auth-visual-logo-orb {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nethra-auth-visual-logo-core {
+  width: 36px;
+  height: 36px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  box-shadow: var(--glow-cyan-lg), var(--glow-purple);
+  animation: nethraAuthOrbPulse 3.5s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes nethraAuthOrbPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: var(--glow-cyan-lg), var(--glow-purple);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow:
+      0 0 50px rgba(6, 182, 212, 0.45),
+      0 0 35px rgba(124, 58, 237, 0.35);
+  }
+}
+
+.nethra-auth-visual-logo-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--accent-primary);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: nethraAuthRing 3.5s ease-out infinite;
+}
+
+.nethra-auth-visual-logo-ring--1 {
+  inset: 15%;
+}
+
+.nethra-auth-visual-logo-ring--2 {
+  inset: -5%;
+  border-color: var(--accent-secondary);
+  animation-delay: -1.7s;
+}
+
+@keyframes nethraAuthRing {
+  0% { transform: scale(0.8); opacity: 0.4; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.nethra-auth-visual-logo-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  animation: nethraAuthParticleOrbit 8s linear infinite;
+  animation-delay: calc(var(--i) * -1.3s);
+}
+
+.nethra-auth-visual-logo-particle:nth-child(odd) {
+  background: var(--accent-secondary);
+  width: 3px;
+  height: 3px;
+}
+
+@keyframes nethraAuthParticleOrbit {
+  0% {
+    transform: rotate(0deg) translateX(40px) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% { opacity: 0.2; }
+  100% {
+    transform: rotate(360deg) translateX(40px) rotate(-360deg);
+    opacity: 0.7;
+  }
+}
+
+/* Visual Title */
+.nethra-auth-visual-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nethra-auth-visual-title-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nethra-auth-visual-subtitle {
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+/* Features List */
+.nethra-auth-visual-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.nethra-auth-visual-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  transition: all var(--transition-base);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: nethraAuthFeatureIn 0.5s ease-out both;
+  animation-delay: var(--delay);
+}
+
+@keyframes nethraAuthFeatureIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nethra-auth-visual-feature:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(6, 182, 212, 0.2);
+}
+
+.nethra-auth-visual-feature-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--accent-primary-subtle);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nethra-auth-visual-feature-icon svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-primary);
+}
+
+/* Chat Preview */
+.nethra-auth-visual-chat {
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.nethra-auth-visual-chat-msg {
+  display: flex;
+  gap: 8px;
+  animation: nethraAuthChatIn 0.6s ease-out 1s both;
+}
+
+@keyframes nethraAuthChatIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nethra-auth-visual-chat-avatar {
+  width: 30px;
+  height: 30px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nethra-auth-visual-chat-avatar svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-primary);
+}
+
+.nethra-auth-visual-chat-bubble {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--radius-sm);
+  padding: 10px 14px;
+  backdrop-filter: blur(8px);
+}
+
+.nethra-auth-visual-chat-bubble p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Particles */
+.nethra-auth-visual-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nethra-auth-visual-particle {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background: var(--accent-primary);
+  border-radius: 50%;
+  left: var(--x);
+  bottom: -5px;
+  opacity: 0;
+  animation: nethraAuthParticleRise var(--duration) linear infinite;
+  animation-delay: var(--delay);
+}
+
+.nethra-auth-visual-particle:nth-child(odd) {
+  background: var(--accent-secondary);
+}
+
+.nethra-auth-visual-particle:nth-child(3n) {
+  background: var(--accent-tertiary);
+}
+
+@keyframes nethraAuthParticleRise {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.2; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* ============================================
+   RIGHT — AUTH CARD SECTION
+   ============================================ */
+.nethra-auth-card-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow-y: auto;
+}
+
+.nethra-auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.nethra-auth-card--transitioning {
+  opacity: 0.3;
+  transform: translateY(8px) scale(0.98);
+}
+
+/* Card glow */
+.nethra-auth-card-glow {
+  position: absolute;
+  top: -60%;
+  right: -30%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--accent-primary-glow) 0%, transparent 60%);
+  opacity: 0.3;
+  pointer-events: none;
+  animation: nethraAuthCardGlow 6s ease-in-out infinite;
+}
+
+@keyframes nethraAuthCardGlow {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.1); }
+}
+
+/* ============================================
+   MOBILE LOGO (hidden on desktop)
+   ============================================ */
+.nethra-auth-mobile-logo {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.nethra-auth-mobile-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nethra-auth-mobile-logo-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-primary);
+}
+
+.nethra-auth-mobile-logo-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   TYPING DOTS
+   ============================================ */
+.nethra-auth-typing-dots {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.nethra-auth-typing-dots span {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  animation: nethraAuthDot 1.6s ease-in-out infinite;
+}
+
+.nethra-auth-typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+  background: var(--accent-secondary);
+}
+
+.nethra-auth-typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+  background: var(--accent-tertiary);
+}
+
+@keyframes nethraAuthDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ============================================
+   AUTH HEADER
+   ============================================ */
+.nethra-auth-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.nethra-auth-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.nethra-auth-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+.nethra-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ============================================
+   INPUT FIELD
+   ============================================ */
+.nethra-auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nethra-auth-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.nethra-auth-field--focus .nethra-auth-label {
+  color: var(--text-accent);
+}
+
+.nethra-auth-field--error .nethra-auth-label {
+  color: var(--error);
+}
+
+.nethra-auth-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nethra-auth-input-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  z-index: 1;
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+.nethra-auth-input-icon svg {
+  width: 100%;
+  height: 100%;
+  color: var(--text-quaternary);
+  transition: color var(--transition-fast);
+}
+
+.nethra-auth-field--focus .nethra-auth-input-icon svg {
+  color: var(--accent-primary);
+}
+
+.nethra-auth-field--error .nethra-auth-input-icon svg {
+  color: var(--error);
+}
+
+.nethra-auth-input {
+  width: 100%;
+  padding: 12px 14px 12px 44px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: all var(--transition-base);
+  outline: none;
+}
+
+.nethra-auth-input::placeholder {
+  color: var(--text-disabled);
+}
+
+.nethra-auth-field--focus .nethra-auth-input {
+  border-color: var(--accent-primary);
+  box-shadow: var(--glow-cyan-sm);
+  background: rgba(6, 182, 212, 0.03);
+}
+
+.nethra-auth-field--error .nethra-auth-input {
+  border-color: var(--error);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.15);
+}
+
+/* Input glow line */
+.nethra-auth-input-glow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  transform: translateX(-50%);
+  transition: width var(--transition-base);
+  pointer-events: none;
+}
+
+.nethra-auth-field--focus .nethra-auth-input-glow {
+  width: 100%;
+}
+
+.nethra-auth-field--error .nethra-auth-input-glow {
+  width: 100%;
+  background: var(--error);
+}
+
+/* Toggle password visibility */
+.nethra-auth-input-toggle {
+  position: absolute;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text-quaternary);
+  transition: color var(--transition-fast);
+  border-radius: var(--radius-sm);
+}
+
+.nethra-auth-input-toggle:hover {
+  color: var(--text-secondary);
+}
+
+.nethra-auth-input-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Error message */
+.nethra-auth-error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: var(--error);
+  animation: nethraAuthErrorIn 0.3s ease-out;
+}
+
+.nethra-auth-error svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+@keyframes nethraAuthErrorIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   PASSWORD STRENGTH METER
+   ============================================ */
+.nethra-auth-pw-strength {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: -6px;
+}
+
+.nethra-auth-pw-bars {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.nethra-auth-pw-bar {
+  height: 3px;
+  flex: 1;
+  border-radius: 2px;
+  background: var(--border-subtle);
+  transition: background var(--transition-base);
+}
+
+.nethra-auth-pw-bar--active {
+  background: var(--bar-color);
+}
+
+.nethra-auth-pw-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 70px;
+  text-align: right;
+}
+
+/* ============================================
+   FORGOT PASSWORD
+   ============================================ */
+.nethra-auth-forgot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -4px;
+}
+
+.nethra-auth-forgot-link {
+  font-size: 0.82rem;
+  color: var(--text-accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.nethra-auth-forgot-link:hover {
+  color: var(--accent-primary-light);
+  text-decoration: underline;
+}
+
+/* ============================================
+   SUBMIT BUTTON
+   ============================================ */
+.nethra-auth-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  margin-top: 0.25rem;
+}
+
+.nethra-auth-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    var(--shadow-primary),
+    var(--glow-cyan),
+    var(--glow-purple-sm);
+}
+
+.nethra-auth-submit:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.nethra-auth-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.nethra-auth-submit svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-fast);
+}
+
+.nethra-auth-submit:hover:not(:disabled) svg {
+  transform: translateX(3px);
+}
+
+/* Shimmer effect */
+.nethra-auth-submit-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  animation: nethraAuthShimmer 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes nethraAuthShimmer {
+  0% { left: -100%; }
+  30% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* Spinner */
+.nethra-auth-spinner {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nethra-auth-spinner-svg {
+  width: 100%;
+  height: 100%;
+  animation: nethraAuthSpin 1s linear infinite;
+}
+
+@keyframes nethraAuthSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   DIVIDER
+   ============================================ */
+.nethra-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 1.5rem 0;
+}
+
+.nethra-auth-divider::before,
+.nethra-auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-default), transparent);
+}
+
+.nethra-auth-divider span {
+  font-size: 0.78rem;
+  color: var(--text-quaternary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   MODE SWITCH
+   ============================================ */
+.nethra-auth-switch {
+  text-align: center;
+}
+
+.nethra-auth-switch-text {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+.nethra-auth-switch-btn {
+  background: none;
+  border: none;
+  color: var(--text-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 6px;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.nethra-auth-switch-btn:hover {
+  color: var(--accent-primary-light);
+  text-decoration: underline;
+}
+
+/* ============================================
+   SECURITY NOTE
+   ============================================ */
+.nethra-auth-security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 1.25rem;
+}
+
+.nethra-auth-security svg {
+  width: 13px;
+  height: 13px;
+  color: var(--text-disabled);
+}
+
+.nethra-auth-security span {
+  font-size: 0.72rem;
+  color: var(--text-disabled);
+}
+
+/* ============================================
+   RESPONSIVE: Tablet (< 1024px)
+   ============================================ */
+@media (max-width: 1023px) {
+  .nethra-auth-container {
+    grid-template-columns: 1fr;
+  }
+
+  .nethra-auth-visual {
+    display: none;
+  }
+
+  .nethra-auth-card-section {
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+    background: var(--bg-primary);
+    position: relative;
+  }
+
+  /* Show the simple bg gradient on mobile */
+  .nethra-auth-card-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-mesh);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .nethra-auth-card {
+    position: relative;
+    z-index: 1;
+    max-width: 460px;
+  }
+
+  .nethra-auth-mobile-logo {
+    display: flex;
+  }
+}
+
+/* ============================================
+   RESPONSIVE: Large Mobile (< 640px)
+   ============================================ */
+@media (max-width: 639px) {
+  .nethra-auth-card-section {
+    padding: 1.5rem 1rem;
+    align-items: flex-start;
+    padding-top: 3rem;
+  }
+
+  .nethra-auth-card {
+    padding: 2rem 1.5rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .nethra-auth-title {
+    font-size: 1.5rem;
+  }
+
+  .nethra-auth-toast {
+    left: 16px;
+    right: 16px;
+    max-width: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE: Small Mobile (< 480px)
+   ============================================ */
+@media (max-width: 479px) {
+  .nethra-auth-card-section {
+    padding: 1rem 0.75rem;
+    padding-top: 2.5rem;
+  }
+
+  .nethra-auth-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .nethra-auth-title {
+    font-size: 1.35rem;
+  }
+
+  .nethra-auth-subtitle {
+    font-size: 0.82rem;
+  }
+
+  .nethra-auth-input {
+    padding: 11px 12px 11px 40px;
+    font-size: 0.85rem;
+  }
+
+  .nethra-auth-submit {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  .nethra-auth-mobile-logo-text {
+    font-size: 1.3rem;
+  }
+}
+
+/* ============================================
+   LANDSCAPE MOBILE
+   ============================================ */
+@media (max-height: 600px) and (orientation: landscape) {
+  .nethra-auth-card-section {
+    padding: 1rem;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .nethra-auth-card {
+    margin: 0 auto;
+  }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  .nethra-auth-submit:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .nethra-auth-submit:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  .nethra-auth-input {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .nethra-auth {
+    transition-duration: 0.01ms !important;
+  }
+
+  .nethra-auth-card--transitioning {
+    transition-duration: 0.01ms !important;
+  }
+
+  .nethra-auth-visual-blob,
+  .nethra-auth-visual-logo-ring,
+  .nethra-auth-visual-logo-particle,
+  .nethra-auth-visual-particle {
+    animation: none !important;
+  }
+
+  .nethra-auth-visual-logo-core {
+    animation: none !important;
+  }
+
+  .nethra-auth-submit-shimmer {
+    animation: none !important;
+    display: none;
+  }
+
+  .nethra-auth-typing-dots span {
+    animation: none !important;
+    opacity: 0.5;
+  }
+
+  .nethra-auth-card-glow {
+    animation: none !important;
+    opacity: 0.2;
+  }
+
+  .nethra-auth-spinner-svg {
+    animation-duration: 0.5s;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST
+   ============================================ */
+@media (prefers-contrast: high) {
+  .nethra-auth-card {
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .nethra-auth-input {
+    border-width: 2px;
+  }
+
+  .nethra-auth-submit {
+    border: 2px solid currentColor;
+  }
+
+  .nethra-auth-visual-title-gradient,
+  .nethra-auth-mobile-logo-text {
+    -webkit-text-fill-color: currentColor;
+    color: var(--accent-primary);
+    background: none;
+  }
+}
+
+/* ============================================
+   FOCUS VISIBLE
+   ============================================ */
+.nethra-auth-input:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.nethra-auth-submit:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+.nethra-auth-switch-btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.nethra-auth-input-toggle:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.nethra-auth-forgot-link:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================
+   SAFE AREA INSETS
+   ============================================ */
+@supports (padding: max(0px)) {
+  .nethra-auth-card-section {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* ============================================
+   PRINT
+   ============================================ */
+@media print {
+  .nethra-auth-visual,
+  .nethra-auth-card-glow,
+  .nethra-auth-submit-shimmer,
+  .nethra-auth-typing-dots,
+  .nethra-auth-security {
+    display: none !important;
+  }
+
+  .nethra-auth {
+    background: white;
+    color: black;
+  }
+
+  .nethra-auth-card {
+    background: white;
+    border: 1px solid #ccc;
+  }
+}
+/* ============================================
+   LOGGED-IN: CHAT BUTTON
+   ============================================ */
+.nethra-navbar-comp-chat-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ============================================
+   LOGGED-IN: PROFILE BUTTON & AVATAR
+   ============================================ */
+.nethra-navbar-comp-profile {
+  position: relative;
+}
+
+.nethra-navbar-comp-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full, 9999px);
+  padding: 3px 10px 3px 3px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.nethra-navbar-comp-profile-btn:hover {
+  border-color: rgba(6, 182, 212, 0.35);
+  background: rgba(6, 182, 212, 0.06);
+}
+
+.nethra-navbar-comp-profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gradient-primary, linear-gradient(135deg, #06b6d4, #7c3aed));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.nethra-navbar-comp-profile-status {
+  position: absolute;
+  bottom: 3px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background: var(--success, #10b981);
+  border: 2px solid var(--bg-primary, #0a0e1a);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.nethra-navbar-comp-profile-btn svg {
+  width: 12px;
+  height: 12px;
+  color: var(--text-quaternary, #64748b);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.nethra-navbar-comp-profile-btn:hover svg {
+  color: var(--text-secondary, #cbd5e1);
+}
+
+/* ============================================
+   PROFILE DROPDOWN
+   ============================================ */
+.nethra-navbar-comp-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 260px;
+  background: rgba(13, 17, 28, 0.96);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg, 14px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  padding: 6px;
+  opacity: 0;
+  transform: scale(0.95) translateY(-6px);
+  transform-origin: top right;
+  pointer-events: none;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+.nethra-navbar-comp-dropdown--open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+/* Dropdown Header */
+.nethra-navbar-comp-dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px 12px;
+}
+
+.nethra-navbar-comp-dropdown-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--gradient-primary, linear-gradient(135deg, #06b6d4, #7c3aed));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.nethra-navbar-comp-dropdown-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nethra-navbar-comp-dropdown-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary, #f8fafc);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nethra-navbar-comp-dropdown-email {
+  font-size: 0.75rem;
+  color: var(--text-quaternary, #64748b);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dropdown Divider */
+.nethra-navbar-comp-dropdown-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  margin: 4px 8px;
+}
+
+/* Dropdown Items */
+.nethra-navbar-comp-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm, 6px);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary, #cbd5e1);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  font-family: inherit;
+  text-align: left;
+}
+
+.nethra-navbar-comp-dropdown-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-tertiary, #94a3b8);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.nethra-navbar-comp-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary, #f8fafc);
+}
+
+.nethra-navbar-comp-dropdown-item:hover svg {
+  color: var(--accent-primary, #06b6d4);
+}
+
+/* Danger item (logout) */
+.nethra-navbar-comp-dropdown-item--danger:hover {
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--error, #ef4444);
+}
+
+.nethra-navbar-comp-dropdown-item--danger:hover svg {
+  color: var(--error, #ef4444);
+}
+
+/* ============================================
+   MOBILE: PROFILE HEADER (LOGGED IN)
+   ============================================ */
+.nethra-navbar-comp-mobile-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.nethra-navbar-comp-mobile-menu--open .nethra-navbar-comp-mobile-profile-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.05s;
+}
+
+.nethra-navbar-comp-mobile-profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gradient-primary, linear-gradient(135deg, #06b6d4, #7c3aed));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.nethra-navbar-comp-mobile-profile-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nethra-navbar-comp-mobile-profile-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary, #f8fafc);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nethra-navbar-comp-mobile-profile-email {
+  font-size: 0.78rem;
+  color: var(--text-quaternary, #64748b);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================
+   MOBILE: DANGER BUTTON (LOGOUT)
+   ============================================ */
+.nethra-navbar-comp-mobile-btn--danger {
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--error, #ef4444);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.nethra-navbar-comp-mobile-btn--danger:hover {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.nethra-navbar-comp-mobile-btn--danger:active {
+  transform: scale(0.98);
+}
+
+/* ============================================
+   PROTECTED ROUTE LOADING
+   ============================================ */
+.nethra-protected-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary, #0a0e1a);
+}
+
+.nethra-protected-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  border-top-color: var(--accent-primary, #06b6d4);
+  border-radius: 50%;
+  animation: nethraProtectedSpin 0.7s linear infinite;
+}
+
+@keyframes nethraProtectedSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   RESPONSIVE: HIDE PROFILE ON MOBILE
+   ============================================ */
+@media (max-width: 1023px) {
+  .nethra-navbar-comp-profile,
+  .nethra-navbar-comp-chat-btn {
+    display: none;
+  }
+}
+
+/* ============================================
+   DROPDOWN: FOCUS VISIBLE
+   ============================================ */
+.nethra-navbar-comp-profile-btn:focus-visible {
+  outline: 2px solid var(--accent-primary, #06b6d4);
+  outline-offset: 3px;
+}
+
+.nethra-navbar-comp-dropdown-item:focus-visible {
+  outline: 2px solid var(--accent-primary, #06b6d4);
+  outline-offset: -2px;
+  border-radius: var(--radius-sm, 6px);
+}
+
+/* ============================================
+   REDUCED MOTION: DROPDOWN
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .nethra-navbar-comp-dropdown {
+    transition-duration: 0.01ms !important;
+  }
+
+  .nethra-navbar-comp-mobile-profile-header {
+    transition-duration: 0.01ms !important;
+  }
+}

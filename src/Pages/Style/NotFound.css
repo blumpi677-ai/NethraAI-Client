@@ -1,0 +1,485 @@
+/* ============================================
+   NETHRA 404 PAGE
+   ============================================ */
+
+.nf-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nf-page--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   BACKGROUND
+   ============================================ */
+.nf-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nf-bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.25;
+}
+
+.nf-bg-blob--1 {
+  width: 500px;
+  height: 500px;
+  background: var(--accent-primary-glow);
+  top: -20%;
+  left: -10%;
+  animation: nfBlobDrift 20s ease-in-out infinite;
+}
+
+.nf-bg-blob--2 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-secondary-glow);
+  bottom: -15%;
+  right: -10%;
+  animation: nfBlobDrift 25s ease-in-out infinite reverse;
+}
+
+@keyframes nfBlobDrift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -20px); }
+}
+
+.nf-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+}
+
+.nf-bg-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+}
+
+/* ============================================
+   CONTENT
+   ============================================ */
+.nf-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  max-width: 560px;
+  width: 100%;
+}
+
+/* ============================================
+   404 CODE — GLITCH EFFECT
+   ============================================ */
+.nf-code-wrap {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.nf-code {
+  font-size: clamp(5rem, 15vw, 10rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  margin: 0;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  animation: nfGlitch 4s ease-in-out infinite;
+}
+
+/* Glitch pseudo-layers */
+.nf-code::before,
+.nf-code::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nf-code::before {
+  animation: nfGlitchLayer1 4s ease-in-out infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.nf-code::after {
+  animation: nfGlitchLayer2 4s ease-in-out infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+@keyframes nfGlitch {
+  0%, 90%, 100% { opacity: 1; }
+  92% { opacity: 0.8; }
+  94% { opacity: 1; }
+}
+
+@keyframes nfGlitchLayer1 {
+  0%, 88%, 100% { transform: translate(0); }
+  90% { transform: translate(-3px, 2px); }
+  92% { transform: translate(2px, -1px); }
+  94% { transform: translate(0); }
+}
+
+@keyframes nfGlitchLayer2 {
+  0%, 88%, 100% { transform: translate(0); }
+  91% { transform: translate(3px, -2px); }
+  93% { transform: translate(-2px, 1px); }
+  95% { transform: translate(0); }
+}
+
+.nf-code-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    circle,
+    rgba(6, 182, 212, 0.08) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   ORB
+   ============================================ */
+.nf-orb {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nf-orb-core {
+  width: 28px;
+  height: 28px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  box-shadow: var(--glow-cyan), var(--glow-purple-sm);
+  animation: nfOrbPulse 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes nfOrbPulse {
+  0%, 100% { transform: scale(1); }
+  50% {
+    transform: scale(1.15);
+    box-shadow: var(--glow-cyan-lg), var(--glow-purple);
+  }
+}
+
+.nf-orb-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--accent-primary);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: nfRingPulse 3.5s ease-out infinite;
+}
+
+.nf-orb-ring--2 {
+  inset: -15%;
+  border-color: var(--accent-secondary);
+  animation-delay: -1.7s;
+}
+
+@keyframes nfRingPulse {
+  0% { transform: scale(0.8); opacity: 0.4; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.nf-orb-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  animation: nfParticleOrbit 7s linear infinite;
+  animation-delay: calc(var(--i) * -1.2s);
+}
+
+.nf-orb-particle:nth-child(odd) {
+  background: var(--accent-secondary);
+  width: 2px;
+  height: 2px;
+}
+
+@keyframes nfParticleOrbit {
+  0% { transform: rotate(0deg) translateX(32px) rotate(0deg); opacity: 0.7; }
+  50% { opacity: 0.2; }
+  100% { transform: rotate(360deg) translateX(32px) rotate(-360deg); opacity: 0.7; }
+}
+
+/* ============================================
+   TEXT
+   ============================================ */
+.nf-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.nf-desc {
+  font-size: 0.95rem;
+  color: var(--text-tertiary);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.nf-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nf-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.nf-btn--primary {
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-primary);
+}
+
+.nf-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary), var(--glow-cyan-sm);
+}
+
+.nf-btn--primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.nf-btn--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+}
+
+.nf-btn--ghost:hover {
+  border-color: var(--border-accent);
+  color: var(--text-primary);
+  background: var(--accent-primary-subtle);
+}
+
+/* ============================================
+   REDIRECT NOTICE
+   ============================================ */
+.nf-redirect {
+  font-size: 0.8rem;
+  color: var(--text-quaternary);
+  margin: 0 0 2rem;
+}
+
+.nf-countdown {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--accent-primary-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--text-accent);
+  font-variant-numeric: tabular-nums;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+/* ============================================
+   QUICK LINKS
+   ============================================ */
+.nf-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.nf-links-label {
+  font-size: 0.78rem;
+  color: var(--text-quaternary);
+}
+
+.nf-links-list {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nf-link {
+  padding: 5px 14px;
+  background: var(--glass-bg);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nf-link:hover {
+  border-color: var(--border-accent);
+  color: var(--text-accent);
+  background: var(--accent-primary-subtle);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 639px) {
+  .nf-content {
+    padding: 1.5rem;
+  }
+
+  .nf-title {
+    font-size: 1.25rem;
+  }
+
+  .nf-desc {
+    font-size: 0.875rem;
+  }
+
+  .nf-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nf-btn {
+    width: 100%;
+    max-width: 260px;
+    justify-content: center;
+  }
+
+  .nf-orb {
+    width: 60px;
+    height: 60px;
+  }
+
+  .nf-orb-core {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .nf-code,
+  .nf-code::before,
+  .nf-code::after {
+    animation: none !important;
+  }
+
+  .nf-orb-core,
+  .nf-orb-ring,
+  .nf-orb-particle,
+  .nf-bg-blob {
+    animation: none !important;
+  }
+
+  .nf-page {
+    transition-duration: 0.1s;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST
+   ============================================ */
+@media (prefers-contrast: high) {
+  .nf-code {
+    -webkit-text-fill-color: currentColor;
+    color: var(--accent-primary);
+    background: none;
+  }
+
+  .nf-btn {
+    border: 2px solid currentColor;
+  }
+}
+
+/* ============================================
+   FOCUS VISIBLE
+   ============================================ */
+.nf-btn:focus-visible,
+.nf-link:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   PRINT
+   ============================================ */
+@media print {
+  .nf-bg,
+  .nf-orb,
+  .nf-code-glow {
+    display: none !important;
+  }
+
+  .nf-page {
+    background: white;
+    color: black;
+  }
+}
