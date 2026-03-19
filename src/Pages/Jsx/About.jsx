@@ -1537,7 +1537,6 @@ const AboutUs = () => {
         <StorySection />
         <ValuesSection />
         <TechnologySection />
-        <TestimonialsSection />
         <FAQSection />
         <CTASection />
       </div>
